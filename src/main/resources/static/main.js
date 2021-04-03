@@ -1,13 +1,13 @@
-function scriptTest(){
-    console.log(" scriptTest()");
-}
-scriptTest();
-
 function testButton(){
     console.log("button test");
 }
 
-function search() {
+// -----SUDENT-----
+function jQueryTest (){
+    $("#one").hide();
+}
+
+function getStudentsList() {
     $.ajax({
         url: "/getStudents",
         contentType: "application/json",
@@ -18,6 +18,13 @@ function search() {
     })
 };
 
-function jQueryTest (){
-    $("#one").hide();
+function addStudents(){
+    $.ajax({
+        url: "/getStudents",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+        }
+    })
 }

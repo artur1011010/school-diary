@@ -9,22 +9,22 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long student_id;
-    String name;
-    String last_name;
+    String firstName;
+    String lastName;
 
     public Student() {
     }
 
-    public Student(String name, String last_name) {
-        this.name = name;
-        this.last_name = last_name;
+    public Student(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
     public String toString() {
         return "Student: " +
                 "id:" + student_id +
-                ", name: " + name +
-                ", last name:" + last_name;
+                ", name: " + firstName +
+                ", last name:" + lastName;
     }
 }
