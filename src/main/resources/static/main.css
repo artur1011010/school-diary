@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+.welcome{
+    color: red;
+}
+.error_page_link{
+    color: black;
+    text-decoration: none;
+}

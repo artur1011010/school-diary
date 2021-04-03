@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Page</title>
+    <th:block th:include="fragments/imports.html :: head"></th:block>
+
+</head>
+<body class="error_page">
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <a class="error" th:href="@{/}">Sorry :( The link is broken or the page has been moved - go back
+            home</a>
+    </div>
+</div>
+</body>
+</html>
