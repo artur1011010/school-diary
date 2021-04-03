@@ -2,8 +2,8 @@
     margin: 0;
     box-sizing: border-box;
 }
-.welcome{
-    color: red;
+.main-wrapper{
+    margin: 100px 200px;
 }
 .error_page_link{
     color: black;

@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:include="fragments/imports :: head"></th:block>
 </head>
+
 <body>
-<p>students list:</p>
+    <div class="main-wrapper container-fluid">
+        <h1>container fluid w students list</h1>
+        <h3>buttons test:</h3>
+        <div id="one">jquery test</div>
+        <button type="button" onclick="search()" class="btn btn-success">search </button>
+        <button type="button" onclick="jQueryTest()" class="btn btn-danger">Danger</button>
+        <button type="button" onclick="testButton()" class="btn btn-warning">Warning</button>
+        <button type="button" onclick="testButton()" class="btn btn-info">Info</button>
+        <button type="button" onclick="testButton()" class="btn btn-light">Light</button>
+    </div>
 </body>
 <th:block th:include="fragments/imports :: js_import"></th:block>
+
 </html>

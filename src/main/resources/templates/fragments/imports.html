@@ -9,14 +9,14 @@
               integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
               crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/main.css}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap-table.min.css" th:src="@{/lib/bootstrap-table.min.css}">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     </th:block>
 </head>
 <body>
 
 <th:block th:fragment="js_import">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -24,6 +24,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script src="/lib/bootstrap-table.min.css" th:src="@{/lib/bootstrap-table.min.css}"></script>
+    <script src="/lib/bootstrap-table.min.js" th:src="@{/lib/bootstrap-table.min.js}"></script>
     <script src="/script.js" th:src="@{/main.js}"></script>
 </th:block>
 </body>
