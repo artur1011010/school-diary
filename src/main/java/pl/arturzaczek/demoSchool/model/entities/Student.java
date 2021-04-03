@@ -2,6 +2,7 @@ package pl.arturzaczek.demoSchool.model.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "STUDENT")
@@ -15,6 +16,8 @@ public class Student {
     @Basic
     @Temporal(TemporalType.DATE)
     private Date birthDate;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Grade> gradeList;
 
     public Student() {
     }

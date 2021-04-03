@@ -8,7 +8,11 @@ public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long professor_id;
+    private Long professor_id;
+    private String firstName;
+    private String lastName;
 
+    public Professor() {
 
+    }
 }
