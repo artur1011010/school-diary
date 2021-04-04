@@ -104,3 +104,10 @@ function populateStudentsList(input) {
         $('#studentListResult').bootstrapTable('load', jsonArr);
     }
 }
+function idSorter(a, b) {
+    return a - b
+}
+
+function nameSorter(a, b){
+    return a.localeCompare(b);
+}

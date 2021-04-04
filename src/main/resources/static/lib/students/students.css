@@ -1,3 +1,7 @@
 #studentListResultWrapper{
     display: none;
 }
+.table-wrapper{
+    margin-right: auto;
+    margin-left: auto;
+}
