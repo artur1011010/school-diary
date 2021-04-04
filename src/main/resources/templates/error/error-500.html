@@ -1,17 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Error Page</title>
     <th:block th:include="fragments/imports.html :: head"></th:block>
+
 </head>
 <body>
 <th:block th:include="fragments/imports :: nav"></th:block>
 <div class="container-fluid">
     <div class="justify-content-center error-page">
-        <h5>error 404</h5><br>
-            <a class="error-page-link" th:href="@{/}">Sorry :( The link is broken or the page has been moved - go back
-                home</a>
+        <h5>error 500</h5><br>
+        <a class="error-page-link" th:href="@{/}">Sorry :( The link is broken or the page has been moved - go back
+            home</a>
     </div>
 </div>
 </body>
