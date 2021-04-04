@@ -8,29 +8,53 @@
 </head>
 
 <body>
-<div class="main-wrapper justify-content-center">
-    <div class="row form-basic">
-<!--        <div class="col-6 col-sm-10">-->
-            <h4>New student:</h4>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="first-name">Imię</span>
-                <input type="text" class="form-control" placeholder="first name">
+<th:block th:include="fragments/imports :: nav"></th:block>
+<div class="main-wrapper">
+    <div class="row form-basic mt-3 justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12">
+            <h4>Formularz nowego studenta</h4>
+            <div class="input-group mb-3 ">
+                <input type="text" id="first-name" class="form-control rounded-right" placeholder="imie">
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+                <div class="invalid-feedback">
+                    Proszę wpisać imie... (przynajmniej 1 litera)
+                </div>
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="last-name">Nazwisko</span>
-                <input type="text" class="form-control" placeholder="first name">
+                <input type="text" id="last-name" class="form-control rounded-right" placeholder="nazwisko">
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+                <div class="invalid-feedback">
+                    Proszę wpisać nazwisko...
+                </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="email">
-                <span class="input-group-text" id="mail">@example.com</span>
+                <input type="text" id="email" class="form-control rounded-right" placeholder="email">
+                <span class="input-group-text" id="mail">for@example.com</span>
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+                <div class="invalid-feedback">
+                    nieprawidłowy adres
+                </div>
             </div>
             <label for="birth-date" class="form-label">Data urodzenia</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="data urodzenia">
+                <input type="date" class="form-control datepicker rounded-right" placeholder="data urodzenia">
                 <span class="input-group-text" id="birth-date">Data urodzenia</span>
+                <div class="valid-feedback">
+                    Ok!
+                </div>
+                <div class="invalid-feedback">
+                    nieprawidłowa data
+                </div>
             </div>
+            <button type="button" class="btn btn-secondary" onclick="postForm()">Potwierdź</button>
         </div>
-<!--    </div>-->
+    </div>
 </div>
 </body>
 <th:block th:include="fragments/imports :: js_import"></th:block>

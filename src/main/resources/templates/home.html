@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
     <title>Spring Security Example</title>
     <th:block th:include="fragments/imports :: head"></th:block>
-<!--    <link rel="icon" th:href="@{/main.css}" type="image/x-icon">-->
-<!--    <link th:href="@{/main.css}" rel="stylesheet"/>-->
+    <!--    <link rel="icon" th:href="@{/main.css}" type="image/x-icon">-->
+    <!--    <link th:href="@{/main.css}" rel="stylesheet"/>-->
 </head>
+
 <body>
-<h1>Welcome!</h1>
-<p class="welcome">home page = home.html</p>
+    <th:block th:include="fragments/imports :: nav"></th:block>
+    <div class="main-wrapper">
+        <h1>School diary</h1>
+        <p>home page</p>
+    </div>
 </body>
 <th:block th:include="fragments/imports :: js_import"></th:block>
+
 </html>
