@@ -11,9 +11,54 @@
 
 <body>
     <th:block th:include="fragments/imports :: nav"></th:block>
-    <div class="main-wrapper">
+    <div class="main-wrapper justify-content-center">
         <h1>School diary</h1>
         <p>home page</p>
+        <div class="changelog-table col-8">
+            <table class="table">
+                <h4>change log</h4>
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">User</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>03.04.2021</td>
+                    <td>old repo moved to new space</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>03.04.2021</td>
+                    <td>building new student form and simple validation</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>03.04.2021</td>
+                    <td>created simple nav</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>04.04.2021</td>
+                    <td>js moved from main to students, minor error page changes</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>04.04.2021</td>
+                    <td>main page changelog</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 <th:block th:include="fragments/imports :: js_import"></th:block>
