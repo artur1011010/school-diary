@@ -15,7 +15,7 @@
 
     <!-- STUDENT SEARCH RESULT -->
     <button type="button" onclick="add5Students()" class="btn btn-primary">add 5 students</button>
-    <button type="button" onclick="getStudentsList()" class="btn btn-primary">get students list</button>
+    <button type="button" onclick="getStudentsList()" class="btn btn-primary">refresh</button>
     <div id="studentListResultWrapper">
         <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 table-wrapper">
             <p>results:</p>
@@ -31,15 +31,10 @@
             </table>
         </div>
     </div>
-
-    <hr class="mb-5">
-    <h6>jquery/js test</h6>
-    <button type="button" onclick="getStudentsList()" class="btn btn-secondary">get students list</button>
-    <button type="button" onclick="jQueryTest()" class="btn btn-secondary">jQuery test</button>
-    <button type="button" onclick="addStudent()" class="btn btn-secondary">add one student</button>
-
 </div>
 </body>
 <th:block th:include="fragments/imports :: js_import"></th:block>
-
+<script>
+    getStudentsList();
+</script>
 </html>

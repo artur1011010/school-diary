@@ -32,14 +32,14 @@ public class StudentController {
         studentlist.add(new Student("Mariusz", "Cccc"));
         studentlist.add(new Student("Anna", "Dddd"));
         studentlist.add(new Student("Kamila", "Eeeee"));
-        studentRepository.saveAll(studentlist);
+//        studentRepository.saveAll(studentlist);
         return "students/addStudent";
     }
 
     @GetMapping("/studentsList")
     public String getStudentsList(){
         List<Student> all = studentRepository.findAll();
-        all.forEach(element -> System.out.println(element.toString()));
+//        all.forEach(element -> System.out.println(element.toString()));
         return "students/studentsList";
     }
 }
