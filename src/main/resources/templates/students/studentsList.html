@@ -11,15 +11,31 @@
 <body>
     <th:block th:include="fragments/imports :: nav"></th:block>
     <div class="main-wrapper container-fluid">
-        <h1>container fluid: students list</h1>
-        <h3>buttons test:</h3>
-        <div id="one">jquery test</div>
-        <button type="button" onclick="getStudentsList()" class="btn btn-success">get students list</button>
-        <button type="button" onclick="jQueryTest()" class="btn btn-success">jQuery test</button>
-        <button type="button" onclick="addStudent()" class="btn btn-danger">add one student</button>
-        <button type="button" onclick="add5Students()" class="btn btn-warning">add 5 students</button>
-        <button type="button" onclick="testButton()" class="btn btn-info">Info</button>
-        <button type="button" onclick="testButton()" class="btn btn-light">Light</button>
+        <h4>Students list</h4>
+
+        <!-- STUDENT SEARCH RESULT -->
+        <button type="button" onclick="add5Students()" class="btn btn-primary">add 5 students</button>
+        <button type="button" onclick="getStudentsList()" class="btn btn-primary">get students list</button>
+        <div id="studentListResultWrapper">
+            <div class="cp-table-header">results:</div>
+            <table id="studentListResult" data-toggle="table">
+                <thead>
+                <tr>
+                    <th data-field="student_id">ID:</th>
+                    <th data-field="firstName">Imię:</th>
+                    <th data-field="lastName">Nazwisko:</th>
+                    <th data-field="birthDate">Data urodzenia:</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+        <hr class="mb-5">
+        <h6>jquery/js test</h6>
+        <button type="button" onclick="getStudentsList()" class="btn btn-secondary">get students list</button>
+        <button type="button" onclick="jQueryTest()" class="btn btn-secondary">jQuery test</button>
+        <button type="button" onclick="addStudent()" class="btn btn-secondary">add one student</button>
+
     </div>
 </body>
 <th:block th:include="fragments/imports :: js_import"></th:block>

@@ -10,6 +10,7 @@ function getStudentsList() {
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
+            populateStudentsList(result);
             console.log(result);
         }
     })
@@ -85,4 +86,21 @@ function validationInput() {
         $email.addClass('is-valid');
     }
     return result;
+}
+
+function populateStudentsList(input) {
+    if(input.length > 0) {
+        let jsonArr = [];
+        for (let element of input) {
+            jsonArr.push({
+                student_id: element.student_id,
+                firstName: element.firstName,
+                lastName: element.lastName,
+                birthDate: "miejsce na date urodzenia",
+            });
+        }
+        $('#studentListResultWrapper').css("display", "block");
+        $('#studentListResult').bootstrapTable('removeAll');
+        $('#studentListResult').bootstrapTable('load', jsonArr);
+    }
 }

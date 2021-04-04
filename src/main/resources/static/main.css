@@ -18,6 +18,9 @@
     text-align: center;
     margin-top: 30vh;
 }
+nav.navbar-light{
+    border-bottom: 1px solid rgb(110, 109, 109);
+}
 
 .error-page-link{
     color: black;

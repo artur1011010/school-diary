@@ -12,6 +12,7 @@ public class Subject extends BaseEntity {
 
     public Subject() {
     }
+
     public Subject(String subjectName) {
         this.subjectName = subjectName;
     }
