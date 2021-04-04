@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>School diary - register student</title>
     <th:block th:include="fragments/imports :: head"></th:block>
     <th:block th:include="fragments/imports :: student-liks"></th:block>
 </head>
@@ -20,7 +20,7 @@
                     Ok!
                 </div>
                 <div class="invalid-feedback">
-                    Proszę wpisać imie... (przynajmniej 1 litera)
+                    Proszę wpisać imie
                 </div>
             </div>
             <div class="input-group mb-3">
@@ -29,7 +29,7 @@
                     Ok!
                 </div>
                 <div class="invalid-feedback">
-                    Proszę wpisać nazwisko...
+                    Proszę wpisać nazwisko
                 </div>
             </div>
             <div class="input-group mb-3">
@@ -39,7 +39,7 @@
                     Ok!
                 </div>
                 <div class="invalid-feedback">
-                    nieprawidłowy adres
+                    Proszę o prawidłowy adres email
                 </div>
             </div>
             <label for="birth-date" class="form-label">Data urodzenia</label>
@@ -50,7 +50,7 @@
                     Ok!
                 </div>
                 <div class="invalid-feedback">
-                    nieprawidłowa data
+                    Proszę o podanie prawidłowej daty urodzenia (1960-2005)
                 </div>
             </div>
             <button type="button" class="btn btn-secondary" onclick="addStudent()">Potwierdz</button>
