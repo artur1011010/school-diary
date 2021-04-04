@@ -24,6 +24,7 @@ public class Student {
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthDate = new Date(System.currentTimeMillis());
     }
     public Student(String firstName, String lastName, Date birthDate) {
         this.firstName = firstName;

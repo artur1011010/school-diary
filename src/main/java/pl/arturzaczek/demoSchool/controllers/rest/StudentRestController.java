@@ -33,6 +33,7 @@ public class StudentRestController {
 
     @PostMapping("/addStudent")
     public void addStudent(@RequestBody Student student){
+        System.out.println("/addStudent " + student);
         logger.debug("addStudent() rest", student.toString());
         studentRepository.save(student);
     }
