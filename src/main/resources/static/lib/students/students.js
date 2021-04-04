@@ -90,17 +90,17 @@ function validationInput() {
     } else {
         $lastName.addClass('is-valid');
     }
-    if ($email.val().length < 1) {
+    if (($email.val().length < 1) || !validateEmail($email.val())) {
         $email.addClass('is-invalid');
         result = false;
         console.log("result $email: " + result);
     } else {
         $email.addClass('is-valid');
     }
-    if ($birthDate.val().length !== 10) {
+    if (!validateDate($birthDate.val())) {
         $birthDate.addClass('is-invalid');
-        result = false;
         console.log("result $birthDate: " + result);
+        result = false;
     } else {
         $birthDate.addClass('is-valid');
     }
@@ -117,7 +117,12 @@ function addStudent() {
     let $lastName = $('#last-name');
     let $email = $('#email');
     let $birthDate = $('#birth-date');
-    let student = {firstName: $firstName.val(), lastName:$lastName.val(), email: $email.val(), birthDate: $birthDate.val()};
+    let student = {
+        firstName: $firstName.val(),
+        lastName: $lastName.val(),
+        email: $email.val(),
+        birthDate: $birthDate.val()
+    };
     const stringStudent = JSON.stringify(student);
     console.log("addStudent()");
     console.log("student: " + stringStudent);
@@ -133,12 +138,28 @@ function addStudent() {
     })
 }
 
-
-function testDatePicker() {
-    let value = $("#birth-date").val();
-    console.log("testDatePicker(), value: " + value);
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 
-function setDatePicker() {
-    // $('.datepicker').datepicker();
-}
+function validateDate(dateString)
+{
+    if(dateString.length !== 10){
+        return false;
+    }
+    // Parse the date parts to integers
+    var parts = dateString.split("-");
+    var year = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var day = parseInt(parts[2], 10);
+    // Check the ranges of month and year
+    if(year < 1960 || year > 2005 || month == 0 || month > 12)
+        return false;
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
+};
