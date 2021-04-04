@@ -1,16 +1,14 @@
 package pl.arturzaczek.demoSchool.model.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "STUDENT")
-public class Student {
+public class Student extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long student_id;
     private String firstName;
     private String lastName;
     @Basic
@@ -25,19 +23,25 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = new Date(System.currentTimeMillis());
+        super.addedDate = LocalDateTime.now();
     }
     public Student(String firstName, String lastName, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
+        super.addedDate = LocalDateTime.now();
         this.birthDate = birthDate;
     }
 
-    public Long getStudent_id() {
-        return student_id;
+    public LocalDateTime getAddedDate(){
+        return super.addedDate;
     }
 
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
+    public List<Grade> getGradeList() {
+        return gradeList;
+    }
+
+    public void setGradeList(List<Grade> gradeList) {
+        this.gradeList = gradeList;
     }
 
     public String getFirstName() {
@@ -67,7 +71,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student: " +
-                "id:" + student_id +
+                "id:" + id +
                 ", name: " + firstName +
                 ", last name: " + lastName +
                 ", birthDate: " + birthDate;

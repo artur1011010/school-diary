@@ -5,8 +5,7 @@
 <head>
     <title>school diary</title>
     <th:block th:include="fragments/imports :: head"></th:block>
-    <!--    <link rel="icon" th:href="@{/main.css}" type="image/x-icon">-->
-    <!--    <link th:href="@{/main.css}" rel="stylesheet"/>-->
+
 </head>
 
 <body>
@@ -14,6 +13,10 @@
     <div class="main-wrapper justify-content-center">
         <h1>School diary</h1>
         <p>home page</p>
+<!--        -->
+<!--        <a class="nav-link ml-3" th:href="@{/test}">Test en</a>-->
+<!--        <a class="nav-link ml-3" th:href="@{/test2}">Test pl</a>-->
+<!--        -->
         <div class="changelog-table col-8">
             <table class="table">
                 <h4>change log</h4>
@@ -26,6 +29,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <th scope="row">0.09</th>
+                    <td>04.04.2021</td>
+                    <td>entities refactoring, implement baseEntity</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
                 <tr>
                     <th scope="row">0.08</th>
                     <td>04.04.2021</td>

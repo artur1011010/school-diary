@@ -33,7 +33,7 @@ function populateStudentsList(input) {
         let jsonArr = [];
         for (let element of input) {
             jsonArr.push({
-                student_id: element.student_id,
+                student_id: element.id,
                 firstName: element.firstName,
                 lastName: element.lastName,
                 birthDate: element.birthDate,

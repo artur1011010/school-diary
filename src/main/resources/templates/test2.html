@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>school diary</title>
+    <th:block th:include="fragments/imports :: head"></th:block>
+    <th:block th:include="fragments/imports :: student-liks"></th:block>
+</head>
+
+<body>
+<th:block th:include="fragments/imports :: nav"></th:block>
+<div class="main-wrapper justify-content-center">
+    <p>test pl</p>
+    <h1 th:text="#{headline}"></h1>
+    <p th:text="#{intro_text}"></p>
+</div>
+</body>
+<th:block th:include="fragments/imports :: js_import"></th:block>
+
+</html>

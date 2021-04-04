@@ -11,10 +11,10 @@ import javax.persistence.*;
 public class Grade extends BaseEntity {
 
     @OneToOne
-    @JoinColumn(name = "professor_id")
+    @JoinColumn(name = "id")
     private Professor professor;
     @OneToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "id")
     private Subject subject;
     private Integer gradeValue;
 

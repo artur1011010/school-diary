@@ -12,8 +12,18 @@ public class MainController {
     Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @GetMapping(value = {"/","/home","/index"})
-    public String getHome(){
-        logger.debug("getHome()");
+    public String getHomePage(){
+        logger.debug("getHomePage()");
         return "home";
+    }
+    @GetMapping("/test")
+    public String getTestPage(){
+        logger.debug("getTestPage()");
+        return "test";
+    }
+    @GetMapping("/test2")
+    public String getTest2Page(){
+        logger.debug("getTestPage()");
+        return "test2";
     }
 }
