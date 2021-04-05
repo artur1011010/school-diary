@@ -20,3 +20,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+#studentListResultWrapper .student-table-details button.custom-button{
+    /*color: red;*/
+    /*border-radius: 5px;*/
+}

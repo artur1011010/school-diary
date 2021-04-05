@@ -1,7 +1,7 @@
 function getStudentsList() {
     console.log("getStudentsList()")
     $.ajax({
-        url: "/students",
+        url: "/rest/students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
@@ -13,8 +13,9 @@ function getStudentsList() {
 
 function add5Students() {
     console.log("add5Students(): ");
+    setTimeout(function(){ getStudentsList(); }, 200);
     $.ajax({
-        url: "/add5Students",
+        url: "/rest/add5Students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
@@ -87,7 +88,7 @@ function populateStudentsList(input) {
 
 function parseGradeListintoString(gradeList) {
     let resultString = 'grade list: ';
-    gradeList.forEach(grade => resultString += ("\t \n " + grade.id + ", val: " + grade.gradeValue + "; "))
+    gradeList.forEach(grade => resultString += ("\t \n [" + grade.gradeValue + "], "))
     return resultString;
 }
 
@@ -104,7 +105,27 @@ function detailFormatter(index, row) {
     $.each(row, function (key, value) {
         html.push('<p><b>' + key + ':  </b>' + value + '</p>')
     })
-    return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + "</div>";
+    let deleteButton = "<button type ='button' onClick='deleteStudentById("+ row.student_id + ")' className='custom-button delete-button'>delete student</button>"
+    return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + deleteButton + "</div>";
+}
+
+/**
+ * TODO
+ * usunać time out, przerobic to tak zeby po odpowiedzi serwera odswiezalo tabele
+ */
+function deleteStudentById(student_id) {
+    console.log("deleteButton(element):  " + student_id);
+    let url = "/rest/student/" + student_id;
+    setTimeout(function(){ getStudentsList(); }, 50);
+    $.ajax({
+        url: url,
+        contentType: "application/json",
+        dataType: "json",
+        method: "DELETE",
+        success: function (result) {
+            console.log(result);
+        }
+    })
 }
 
 //----Add user ----
