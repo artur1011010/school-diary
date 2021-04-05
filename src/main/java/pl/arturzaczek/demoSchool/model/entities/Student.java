@@ -2,6 +2,7 @@ package pl.arturzaczek.demoSchool.model.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Student extends BaseEntity{
     @Temporal(TemporalType.DATE)
     private Date birthDate;
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_student")
     private List<Grade> gradeList;
 
     public Student() {
@@ -32,16 +34,22 @@ public class Student extends BaseEntity{
         this.birthDate = birthDate;
     }
 
-    public LocalDateTime getAddedDate(){
-        return super.addedDate;
-    }
-
     public List<Grade> getGradeList() {
         return gradeList;
     }
 
     public void setGradeList(List<Grade> gradeList) {
         this.gradeList = gradeList;
+    }
+    public void addToGradeList(Grade grade ){
+        if(gradeList == null){
+            gradeList = new ArrayList<Grade>();
+        }
+        gradeList.add(grade);
+    }
+
+    public LocalDateTime getAddedDate(){
+        return super.addedDate;
     }
 
     public String getFirstName() {

@@ -17,7 +17,6 @@ public class Grade extends BaseEntity {
     @JoinColumn(name = "id_subject")
     private Subject subject;
     @ManyToOne
-    @JoinColumn(name = "id_student")
     private Student student;
     private Integer gradeValue;
 

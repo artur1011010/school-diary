@@ -24,7 +24,22 @@ public class StudentRestController {
         this.studentRepository = studentRepository;
     }
 
-    @GetMapping("/getStudents")
+/**    /students TODO zmiana endpointow zgodnie z konwencja
+ *
+A resource can be a singleton or a collection. For example, “customers” is a
+    collection resource and “customer” is a singleton resource (in a banking domain).
+    We can identify “customers” collection resource using the URI “/customers”.
+    We can identify a single “customer” resource using the URI “/customers/{customerId}”.
+
+    A resource may contain sub-collection resources also. For example,
+    sub-collection resource “accounts” of a particular “customer” can be identified using the
+    URN “/customers/{customerId}/accounts” (in a banking domain). Similarly, a singleton resource
+    “account” inside the sub-collection resource “accounts” can be identified
+    as follows: “/customers/{customerId}/accounts/{accountId}”.
+*/
+
+
+    @GetMapping("/students")
     public List<Student> getStudents(){
         logger.debug("getStudents()");
         List<Student> studentList = studentRepository.findAll();

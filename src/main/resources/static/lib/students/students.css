@@ -1,13 +1,22 @@
-#studentListResultWrapper{
+#studentListResultWrapper {
     display: none;
 }
-.table-wrapper{
+
+.table-wrapper {
     margin-right: auto;
     margin-left: auto;
 }
-.student-table-details{
-text-align: left;
+
+.student-table-details {
+    text-align: left;
 }
-.student-table-details-row{
-line-height: 1em;
+
+.student-table-details-row {
+    line-height: 1em;
+}
+/*TODO -> student_id*/
+.id_studenta {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
 }
