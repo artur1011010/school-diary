@@ -55,10 +55,10 @@ function nameSorter(a, b) {
 
 function validationInput() {
     let result = true;
-    let $firstName = $('#first-name');
-    let $lastName = $('#last-name');
-    let $email = $('#email');
-    let $birthDate = $('#birth-date');
+    const $firstName = $('#first-name');
+    const $lastName = $('#last-name');
+    const $email = $('#email');
+    const $birthDate = $('#birth-date');
 //TODO - sprobowac to zrobic krocej
     $firstName.removeClass('is-invalid');
     $firstName.removeClass('is-valid');
@@ -141,14 +141,14 @@ function validateDate(dateString) {
         return false;
     }
     // Parse the date parts to integers
-    var parts = dateString.split("-");
-    var year = parseInt(parts[0], 10);
-    var month = parseInt(parts[1], 10);
-    var day = parseInt(parts[2], 10);
+    const parts = dateString.split("-");
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    const day = parseInt(parts[2], 10);
     // Check the ranges of month and year
     if (year < 1960 || year > 2005 || month == 0 || month > 12)
         return false;
-    var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     // Adjust for leap years
     if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
         monthLength[1] = 29;
