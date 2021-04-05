@@ -23,6 +23,18 @@ function add5Students() {
     })
 }
 
+function add1StudentWithGrade() {
+    console.log("add1StudentWithGrade(): ");
+    $.ajax({
+        url: "/add1StudentWithGrade",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+        }
+    })
+}
+
 function populateStudentsList(input) {
     if (input.length > 0) {
         let jsonArr = [];
@@ -48,6 +60,13 @@ function idSorter(a, b) {
 
 function nameSorter(a, b) {
     return a.localeCompare(b);
+}
+function detailFormatter(index, row) {
+    var html = []
+    $.each(row, function (key, value) {
+        html.push('<p><b>' + key + ':  </b>' + value + '</p>')
+    })
+    return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + "</div>";
 }
 
 
@@ -101,7 +120,6 @@ function validationInput() {
 }
 
 function addStudent() {
-
     if (!validationInput()) {
         console.log("validationInput: " + validationInput());
         return;

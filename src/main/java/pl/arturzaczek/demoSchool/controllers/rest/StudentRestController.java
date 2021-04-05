@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.arturzaczek.demoSchool.model.entities.Grade;
 import pl.arturzaczek.demoSchool.model.entities.Student;
 import pl.arturzaczek.demoSchool.model.repositories.StudentRepository;
 
@@ -48,5 +49,14 @@ public class StudentRestController {
         studentlist.add(new Student("Kamila", "Eeeee"));
         logger.debug("add5Students() rest",studentlist );
         studentRepository.saveAll(studentlist);
+    }
+    @GetMapping("/add1StudentWithGrade")
+    public void add1StudentWithGrade(){
+        Student student = new Student("Artur", "Z ocenami");
+        System.out.println("student " + student);
+        logger.debug("add1StudentWithGrade() rest " + student.toString());
+        student.getGradeList().add(new Grade(80));
+        System.out.println("student " + student);
+        studentRepository.save(student);
     }
 }

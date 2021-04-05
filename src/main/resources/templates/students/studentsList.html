@@ -15,11 +15,13 @@
 
     <!-- STUDENT SEARCH RESULT -->
     <button type="button" onclick="add5Students()" class="btn btn-primary">add 5 students</button>
+    <button type="button" onclick="add1StudentWithGrade()" class="btn btn-primary">add1StudentWithGrade</button>
     <button type="button" onclick="getStudentsList()" class="btn btn-primary">refresh</button>
     <div id="studentListResultWrapper">
         <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 table-wrapper">
             <p>results:</p>
-            <table id="studentListResult" data-toggle="table">
+            <table id="studentListResult" data-toggle="table" data-detail-formatter="detailFormatter"
+                   data-detail-view-align="right" data-detail-view-icon="true" data-detail-view="true">
                 <thead>
                 <tr>
                     <th data-field="student_id" data-sortable="true" data-sorter="idSorter">ID:</th>

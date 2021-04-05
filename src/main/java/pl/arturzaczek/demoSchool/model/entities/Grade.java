@@ -11,12 +11,16 @@ import javax.persistence.*;
 public class Grade extends BaseEntity {
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_professor")
     private Professor professor;
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_subject")
     private Subject subject;
+    @ManyToOne
+    @JoinColumn(name = "id_student")
+    private Student student;
     private Integer gradeValue;
+
 
     public Grade() {
     }
@@ -26,6 +30,13 @@ public class Grade extends BaseEntity {
     public Grade(Professor professor, Subject subject, Integer gradeValue) {
         this.professor = professor;
         this.subject = subject;
+        setGradeValue(gradeValue);
+    }
+
+    public Grade(Professor professor, Subject subject, Student student, Integer gradeValue) {
+        this.professor = professor;
+        this.subject = subject;
+        this.student = student;
         setGradeValue(gradeValue);
     }
 
@@ -43,6 +54,14 @@ public class Grade extends BaseEntity {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public Integer getGradeValue() {
