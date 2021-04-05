@@ -1,19 +1,20 @@
 package pl.arturzaczek.demoSchool.controllers.rest;
 
+import org.omg.CORBA.portable.Delegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.arturzaczek.demoSchool.model.entities.Grade;
 import pl.arturzaczek.demoSchool.model.entities.Student;
 import pl.arturzaczek.demoSchool.model.repositories.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/**    /students TODO zmienić mapowanie kontrolerów na /rest/ a pozniej Dodac @RequestMapping nad klase
+ */
 @RestController
 public class StudentRestController {
     StudentRepository studentRepository;
@@ -39,7 +40,7 @@ A resource can be a singleton or a collection. For example, “customers” is a
 */
 
 
-    @GetMapping("/students")
+    @GetMapping("/rest/students")
     public List<Student> getStudents(){
         logger.debug("getStudents()");
         List<Student> studentList = studentRepository.findAll();
@@ -54,7 +55,7 @@ A resource can be a singleton or a collection. For example, “customers” is a
         studentRepository.save(student);
     }
 
-    @GetMapping("/add5Students")
+    @GetMapping("/rest/add5Students")
     public void add5Students(){
         List studentlist = new ArrayList<Student>();
         studentlist.add(new Student("Artur", "Aaaaa"));
@@ -73,5 +74,18 @@ A resource can be a singleton or a collection. For example, “customers” is a
         student.getGradeList().add(new Grade(80));
         System.out.println("student " + student);
         studentRepository.save(student);
+    }
+    @DeleteMapping("/rest/student/{student_id}")
+    public String deleteStudentById(@PathVariable String student_id){
+        System.out.println("student_id " + student_id);
+        logger.debug("deleteStudentById() rest " + student_id.toString());
+        Long long_id = Long.parseLong(student_id+"");
+        Optional<Student> byId = studentRepository.findById(long_id);
+        if(!byId.isPresent()){
+            logger.warn("deleteStudentById() rest " + student_id.toString());
+            return "not found: " + student_id;
+        }
+        studentRepository.deleteById(long_id);
+        return "student deleted + " + long_id;
     }
 }
