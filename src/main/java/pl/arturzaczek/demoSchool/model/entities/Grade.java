@@ -20,10 +20,13 @@ public class Grade extends BaseEntity {
 
     public Grade() {
     }
-
-    public Grade(Professor professor, Subject subject) {
+    public Grade(Integer gradeValue) {
+        setGradeValue(gradeValue);
+    }
+    public Grade(Professor professor, Subject subject, Integer gradeValue) {
         this.professor = professor;
         this.subject = subject;
+        setGradeValue(gradeValue);
     }
 
     public Professor getProfessor() {
@@ -43,13 +46,14 @@ public class Grade extends BaseEntity {
     }
 
     public Integer getGradeValue() {
-        return gradeValue;
+        return this.gradeValue;
     }
 
     public void setGradeValue(Integer gradeValue) {
         if (gradeValue > 100 || gradeValue < 0) {
             Logger logger = LoggerFactory.getLogger(StudentRestController.class);
-            logger.error("setGradeValue(), wrong value ", gradeValue);
+            logger.error("setGradeValue(), wrong value " +  gradeValue + ", value set on 0");
+            this.gradeValue = 0;
             return;
         }
         this.gradeValue = gradeValue;
