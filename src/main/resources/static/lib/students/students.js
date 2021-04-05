@@ -1,7 +1,7 @@
 function getStudentsList() {
     console.log("getStudentsList()")
     $.ajax({
-        url: "/getStudents",
+        url: "/students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
@@ -9,7 +9,7 @@ function getStudentsList() {
             console.log(result);
         }
     })
-};
+}
 
 function add5Students() {
     console.log("add5Students(): ");
@@ -23,12 +23,42 @@ function add5Students() {
     })
 }
 
-function add1StudentWithGrade() {
-    console.log("add1StudentWithGrade(): ");
+function addGradeRest() {
+    console.log("addGradeRest(): ");
     $.ajax({
-        url: "/add1StudentWithGrade",
+        url: "/rest/addGradeRest",
         contentType: "application/json",
         dataType: "json",
+        method: "POST",
+        success: function (result) {
+            console.log(result);
+        }
+    })
+}
+
+function addSecondGradeRest() {
+    console.log("addSecondGradeRest(): ");
+    $.ajax({
+        url: "/rest/addSecondGradeRest",
+        contentType: "application/json",
+        dataType: "json",
+        method: "POST",
+        success: function (result) {
+            console.log(result);
+        }
+    })
+}
+
+function addGradeToStudentById() {
+    let element = $("#id_studenta").val();
+    // /addGrade/{student}"
+    console.log("addGradeToStudentById(): " + element);
+    let url = "/rest/addGrade/" + element;
+    $.ajax({
+        url: url,
+        contentType: "application/json",
+        dataType: "json",
+        method: "POST",
         success: function (result) {
             console.log(result);
         }
@@ -44,6 +74,7 @@ function populateStudentsList(input) {
                 firstName: element.firstName,
                 lastName: element.lastName,
                 birthDate: element.birthDate,
+                gradeList: parseGradeListintoString(element.gradeList),
             });
         }
         $('#studentListResultWrapper').css("display", "block");
@@ -54,6 +85,12 @@ function populateStudentsList(input) {
     }
 }
 
+function parseGradeListintoString(gradeList) {
+    let resultString = 'grade list: ';
+    gradeList.forEach(grade => resultString += ("\t \n " + grade.id + ", val: " + grade.gradeValue + "; "))
+    return resultString;
+}
+
 function idSorter(a, b) {
     return a - b
 }
@@ -61,14 +98,14 @@ function idSorter(a, b) {
 function nameSorter(a, b) {
     return a.localeCompare(b);
 }
+
 function detailFormatter(index, row) {
-    var html = []
+    let html = []
     $.each(row, function (key, value) {
         html.push('<p><b>' + key + ':  </b>' + value + '</p>')
     })
     return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + "</div>";
 }
-
 
 //----Add user ----
 
@@ -164,12 +201,12 @@ function validateDate(dateString) {
     const month = parseInt(parts[1], 10);
     const day = parseInt(parts[2], 10);
     // Check the ranges of month and year
-    if (year < 1960 || year > 2005 || month == 0 || month > 12)
+    if (year < 1960 || year > 2005 || month === 0 || month > 12)
         return false;
     const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     // Adjust for leap years
-    if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0))
         monthLength[1] = 29;
     // Check the range of the day
     return day > 0 && day <= monthLength[month - 1];
-};
+}

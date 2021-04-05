@@ -5,7 +5,6 @@
 <head>
     <title>School diary</title>
     <th:block th:include="fragments/imports :: head"></th:block>
-
 </head>
 
 <body>
@@ -13,7 +12,14 @@
     <div class="main-wrapper justify-content-center">
         <h1>School diary</h1>
         <p>home page</p>
-        <button type="button" class="btn btn-secondary" onclick="addGrade()">send student and grade</button>
+        <button type="button" onclick="addGradeRest()" class="btn btn-primary">addGradeRest</button>
+        <button type="button" onclick="addSecondGradeRest()" class="btn btn-primary">addSecondGradeRest</button>
+        <button type="button" onclick="addGradeToStudentById()" class="btn btn-primary">addGradeToStudentById</button>
+
+        <div class="input-group mb-3 id_studenta">
+            <input id="id_studenta" type="number" class="form-control" placeholder="id studenta">
+        </div>
+
 <!--        -->
 <!--        <a class="nav-link ml-3" th:href="@{/test}">Test en</a>-->
 <!--        <a class="nav-link ml-3" th:href="@{/test2}">Test pl</a>-->
@@ -30,6 +36,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <th scope="row">0.14</th>
+                    <td>05.04.2021</td>
+                    <td>grade basic get and post, simple endpoint refactor</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
                 <tr>
                     <th scope="row">0.13</th>
                     <td>05.04.2021</td>
