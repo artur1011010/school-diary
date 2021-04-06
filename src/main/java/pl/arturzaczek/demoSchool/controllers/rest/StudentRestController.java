@@ -24,16 +24,14 @@ public class StudentRestController {
 
     @GetMapping("/students")
     public List<Student> getStudents(){
-        logger.debug("getStudents()");
+        logger.debug("url= /rest/students, method=getStudents()");
         List<Student> studentList = studentRepository.findAll();
-        logger.debug("getStudents()", studentList);
         return studentList;
     }
 
     @PostMapping("/student")
     public void addStudent(@RequestBody Student student){
-        System.out.println("/addStudent " + student);
-        logger.debug("addStudent() rest", student.toString());
+        logger.debug("url= /rest/student, method=addStudent() STUDENT: " + student);
         studentRepository.save(student);
     }
 
@@ -45,13 +43,13 @@ public class StudentRestController {
         studentlist.add(new Student("Mariusz", "Cccc"));
         studentlist.add(new Student("Anna", "Dddd"));
         studentlist.add(new Student("Kamila", "Eeeee"));
-        logger.debug("add5Students() rest",studentlist );
+        logger.debug("url= /rest/add5Students, method=add5Students() STUDENT LIST: " + studentlist);
         studentRepository.saveAll(studentlist);
     }
+
     @DeleteMapping("/student/{student_id}")
     public String deleteStudentById(@PathVariable String student_id){
-        System.out.println("student_id " + student_id);
-        logger.debug("deleteStudentById() rest " + student_id);
+        logger.debug("url= /rest/student/{student_id}, method=deleteStudentById() STUDENT: " + student_id);
         Long long_id = Long.parseLong(student_id+"");
         Optional<Student> byId = studentRepository.findById(long_id);
         if(!byId.isPresent()){

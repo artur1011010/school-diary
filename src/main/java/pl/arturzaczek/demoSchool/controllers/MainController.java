@@ -13,17 +13,17 @@ public class MainController {
 
     @GetMapping(value = {"/","/home","/index"})
     public String getHomePage(){
-        logger.debug("getHomePage()");
+        logger.debug("url= {\"/\",\"/home\",\"/index\"}, method=getHomePage()");
         return "home";
     }
     @GetMapping("/test")
     public String getTestPage(){
-        logger.debug("getTestPage()");
+        logger.debug("url= /test, method=getTestPage()");
         return "test";
     }
     @GetMapping("/test2")
     public String getTest2Page(){
-        logger.debug("getTestPage()");
+        logger.debug("url= /test2, method=getTest2Page()");
         return "test2";
     }
 }

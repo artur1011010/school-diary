@@ -9,7 +9,6 @@ import pl.arturzaczek.demoSchool.model.entities.Student;
 import pl.arturzaczek.demoSchool.model.repositories.StudentRepository;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,21 +24,18 @@ public class StudentController {
 
     @GetMapping("/addStudent")
     public String addStudent(){
-        logger.debug("logger debug - addStudent()");
-        List studentlist = new ArrayList<Student>();
-        studentlist.add(new Student("Artur", "Aaaaa"));
-        studentlist.add(new Student("Marcin", "Bbbbb"));
-        studentlist.add(new Student("Mariusz", "Cccc"));
-        studentlist.add(new Student("Anna", "Dddd"));
-        studentlist.add(new Student("Kamila", "Eeeee"));
-//        studentRepository.saveAll(studentlist);
+        logger.debug("url= /addStudent, method=addStudent()");
         return "students/addStudent";
     }
 
     @GetMapping("/studentsList")
     public String getStudentsList(){
-        List<Student> all = studentRepository.findAll();
-//        all.forEach(element -> System.out.println(element.toString()));
+        logger.debug("url= /studentsList, method=getStudentsList()");
         return "students/studentsList";
+    }
+    @GetMapping("/student/{id}")
+    public String getStudent(){
+        logger.debug("url= //student/{id}, method=getStudent()");
+        return "students/student";
     }
 }

@@ -12,7 +12,7 @@ public class GradeController {
 
     @GetMapping("/addGradeView")
     public String addGrade(){
-        logger.debug("addGrade()");
+        logger.debug("url= /addGradeView, method=addGrade()");
         return "home";
     }
 }

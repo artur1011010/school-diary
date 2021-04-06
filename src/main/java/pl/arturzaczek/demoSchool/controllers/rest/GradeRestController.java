@@ -25,13 +25,19 @@ public class GradeRestController {
         this.gradeRepository = gradeRepository;
     }
 
+    private Student getStudent(Long id) {
+        Student resultStudent = null;
+        Optional<Student> byId = studentRepository.findById(id);
+        if (!byId.isPresent()) {
+            return resultStudent;
+        }
+        resultStudent = byId.get();
+        return resultStudent;
+    }
+
     @PostMapping("/addGradeRest")
     public Student addGradeRest() {
-        System.out.println("addGradeRest()");
-        logger.debug("addGradeRest()");
-        System.out.println("grade list");
-
-        logger.debug("logger debug - addGradeRest()");
+        logger.debug("url= /rest/addGradeRest, method=addGradeRest()");
         Student student = new Student("Artur", "Rest test");
         student.addToGradeList(new Grade(80));
         studentRepository.save(student);
@@ -40,18 +46,14 @@ public class GradeRestController {
 
     @PostMapping("/addSecondGradeRest")
     public Student addSecondGradeRest() {
-        System.out.println("addSecondGradeRest()");
-        logger.debug("addSecondGradeRest()");
-        System.out.println("grade list");
+        logger.debug("url= /rest/addSecondGradeRest, method=addSecondGradeRest()");
         Student resultStudent = new Student("Error", "wrong id");
         Optional<Student> byId = studentRepository.findById(1L);
         if (!byId.isPresent()) {
             return resultStudent;
         }
-        //collection eager fetch
+        //TODO collection eager fetch
         resultStudent = byId.get();
-        resultStudent.addToGradeList(new Grade(70));
-        resultStudent.addToGradeList(new Grade(60));
         resultStudent.addToGradeList(new Grade(50));
         studentRepository.save(resultStudent);
         resultStudent.getGradeList().forEach(grade-> System.out.println("grade: " + grade));
@@ -59,18 +61,16 @@ public class GradeRestController {
     }
 
     @PostMapping("/addGrade/{student}")
-    public Student addGradeToStudentById( @PathVariable String student) {
-        System.out.println("addGradeToStudentById()");
-        logger.debug("addGradeToStudentById()");
+    public Student addGradeToStudentByIdTest(@PathVariable String student) {
+        logger.debug("url= /rest/addGrade/{student}, method=addGradeToStudentByIdTest(), STUDENT: " + student);
         Student resultStudent = new Student("Error", "wrong id");
         Long id = null;
         try {
             id = Long.parseLong(student);
         }catch (Exception exception){
-            logger.error("addGradeToStudentById() parse student id error: " +  student);
+            logger.error("addGradeToStudentByIdTest() parse student id error: " +  student);
             return resultStudent;
         }
-        System.out.println("id: " + id);
         Optional<Student> byId = studentRepository.findById(id);
         if (!byId.isPresent()) {
             return resultStudent;
@@ -79,6 +79,26 @@ public class GradeRestController {
         resultStudent.addToGradeList(new Grade(100));
         studentRepository.save(resultStudent);
         resultStudent.getGradeList().forEach(grade-> System.out.println("grade: " + grade));
+        return resultStudent;
+    }
+
+    @PostMapping("/grade/{student}")
+    public Student addGradeToStudentById(@PathVariable String student, @RequestBody Grade grade) {
+        logger.debug("url= /rest/grade/{student}, method=addGradeToStudentById(), STUDENT: " + student + " , GRADE: " + grade);
+        Student resultStudent = new Student("Error", "wrong id");
+        Long id = null;
+        try {
+            id = Long.parseLong(student);
+        }catch (Exception exception){
+            logger.error("addGradeToStudentById() parse student id error: " +  student);
+            return resultStudent;
+        }
+        Optional<Student> byId = studentRepository.findById(id);
+        if (!byId.isPresent()) {
+            return resultStudent;
+        }
+        resultStudent = byId.get();
+        studentRepository.save(resultStudent);
         return resultStudent;
     }
 }
