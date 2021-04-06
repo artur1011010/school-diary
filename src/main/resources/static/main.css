@@ -28,3 +28,9 @@ nav.navbar-light{
     text-decoration: none;
     display: block;
 }
+ /*input do podania id studenta*/
+.id_student {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}

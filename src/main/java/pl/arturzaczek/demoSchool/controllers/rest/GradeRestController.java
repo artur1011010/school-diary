@@ -25,16 +25,6 @@ public class GradeRestController {
         this.gradeRepository = gradeRepository;
     }
 
-//    @PostMapping("/addGrade")
-//    public Student addGrade(@RequestBody(required = false) Student student) {
-//        System.out.println("addGrade()");
-//        logger.debug("addGrade()");
-//        System.out.println("grade list");
-//        student.getGradeList().forEach(grade -> System.out.println(grade));
-////        System.out.println("student: " + student.setGradeList());
-//        return student;
-//    }
-
     @PostMapping("/addGradeRest")
     public Student addGradeRest() {
         System.out.println("addGradeRest()");
@@ -53,7 +43,6 @@ public class GradeRestController {
         System.out.println("addSecondGradeRest()");
         logger.debug("addSecondGradeRest()");
         System.out.println("grade list");
-
         Student resultStudent = new Student("Error", "wrong id");
         Optional<Student> byId = studentRepository.findById(1L);
         if (!byId.isPresent()) {
@@ -68,18 +57,24 @@ public class GradeRestController {
         resultStudent.getGradeList().forEach(grade-> System.out.println("grade: " + grade));
         return resultStudent;
     }
+
     @PostMapping("/addGrade/{student}")
     public Student addGradeToStudentById( @PathVariable String student) {
         System.out.println("addGradeToStudentById()");
         logger.debug("addGradeToStudentById()");
         Student resultStudent = new Student("Error", "wrong id");
-        //TODO zabezpieczyc gdzies to parsowanie ze stringa
-        Long id = Long.parseLong(student);
+        Long id = null;
+        try {
+            id = Long.parseLong(student);
+        }catch (Exception exception){
+            logger.error("addGradeToStudentById() parse student id error: " +  student);
+            return resultStudent;
+        }
+        System.out.println("id: " + id);
         Optional<Student> byId = studentRepository.findById(id);
         if (!byId.isPresent()) {
             return resultStudent;
         }
-        //TODO collection eager fetch
         resultStudent = byId.get();
         resultStudent.addToGradeList(new Grade(100));
         studentRepository.save(resultStudent);

@@ -5,6 +5,7 @@
 <head>
     <title>School diary</title>
     <th:block th:include="fragments/imports :: head"></th:block>
+    <th:block th:include="fragments/imports :: grade-liks"></th:block>
 </head>
 
 <body>
@@ -16,14 +17,9 @@
         <button type="button" onclick="addSecondGradeRest()" class="btn btn-primary">addSecondGradeRest</button>
         <button type="button" onclick="addGradeToStudentById()" class="btn btn-primary">addGradeToStudentById</button>
 
-        <div class="input-group mb-3 id_studenta">
-            <input id="id_studenta" type="number" class="form-control" placeholder="id studenta">
+        <div class="input-group mb-3 id_student">
+            <input id="id_student" type="number" class="form-control" placeholder="id studenta">
         </div>
-
-<!--        -->
-<!--        <a class="nav-link ml-3" th:href="@{/test}">Test en</a>-->
-<!--        <a class="nav-link ml-3" th:href="@{/test2}">Test pl</a>-->
-<!--        -->
         <div class="changelog-table col-8">
             <table class="table">
                 <h4>change log</h4>
@@ -36,6 +32,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <th scope="row">0.16</th>
+                    <td>06.04.2021</td>
+                    <td>refactoring, rest endpoints changed, students.js file split -> form & list, code clean up</td>
+                    <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+                </tr>
                 <tr>
                     <th scope="row">0.15</th>
                     <td>05.04.2021</td>
