@@ -14,12 +14,6 @@
 .student-table-details-row {
     line-height: 1em;
 }
-/*TODO -> student_id*/
-.id_studenta {
-    width: 150px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 #studentListResultWrapper .student-table-details button.custom-button{
     /*color: red;*/

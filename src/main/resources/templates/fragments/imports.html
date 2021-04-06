@@ -17,8 +17,17 @@
     </th:block>
 
     <th:block th:fragment="student-liks">
-        <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/lib/students/students.css}">
-        <script src="/lib/bootstrap-table.min.js" th:src="@{/lib/students/students.js}"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/student/student.css}">
+        <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/student/student-form.css}">
+        <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/student/student-list.css}">
+        <script src="/lib/bootstrap-table.min.js" th:src="@{/student/student.js}"></script>
+        <script src="/lib/bootstrap-table.min.js" th:src="@{/student/student-form.js}"></script>
+        <script src="/lib/bootstrap-table.min.js" th:src="@{/student/student-list.js}"></script>
+    </th:block>
+
+    <th:block th:fragment="grade-liks">
+        <link rel="stylesheet" type="text/css" href="style.css" th:href="@{/grade/grade.css}">
+        <script src="/lib/bootstrap-table.min.js" th:src="@{/grade/grade.js}"></script>
     </th:block>
 </head>
 <body>
