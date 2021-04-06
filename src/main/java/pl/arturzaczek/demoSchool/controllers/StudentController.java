@@ -33,9 +33,9 @@ public class StudentController {
         logger.debug("url= /studentsList, method=getStudentsList()");
         return "students/studentsList";
     }
-    @GetMapping("/student/{id}")
-    public String getStudent(){
-        logger.debug("url= //student/{id}, method=getStudent()");
-        return "students/student";
-    }
+//    @GetMapping("/student/{id}")
+//    public String getStudent(){
+//        logger.debug("url= //student/{id}, method=getStudent()");
+//        return "students/student";
+//    }
 }
