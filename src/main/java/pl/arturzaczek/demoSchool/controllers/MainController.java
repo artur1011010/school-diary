@@ -19,7 +19,7 @@ public class MainController {
     @GetMapping("/test")
     public String getTestPage(){
         logger.debug("url= /test, method=getTestPage()");
-        return "test";
+        return "test1";
     }
     @GetMapping("/test2")
     public String getTest2Page(){

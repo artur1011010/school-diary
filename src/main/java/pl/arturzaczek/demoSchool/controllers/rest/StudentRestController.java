@@ -46,6 +46,18 @@ public class StudentRestController {
         logger.debug("url= /rest/add5Students, method=add5Students() STUDENT LIST: " + studentlist);
         studentRepository.saveAll(studentlist);
     }
+    @GetMapping("/student/{student_id}")
+    public Student getStudentById(@PathVariable String student_id){
+        logger.debug("url= /rest/student/{student_id}, method=getStudentById() STUDENT: " + student_id);
+        Long long_id = Long.parseLong(student_id+"");
+        Optional<Student> byId = studentRepository.findById(long_id);
+        if(!byId.isPresent()){
+            logger.warn("deleteStudentById() rest " + student_id);
+            return null;
+        }
+        Student student = byId.get();
+        return student;
+    }
 
     @DeleteMapping("/student/{student_id}")
     public String deleteStudentById(@PathVariable String student_id){

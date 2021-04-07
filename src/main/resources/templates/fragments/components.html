@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Components</title>
+
+</head>
+<body>
+<!--
+    TODO posprzatac te ml-3 zagniezdzone, przeniesc do customNavLink
+ -->
+<th:block th:fragment="nav">
+    <nav id="top-navbar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item ml-3">
+                    <a class="nav-link ml-3 " th:href="@{/}">School Diary - home</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="nav-link ml-3" th:href="@{/addStudent}">Add student form</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="ml-3 nav-link" th:href="@{/studentsList}">Students list</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="nav-link ml-3" th:href="@{/student}">student profile</a>
+                </li>
+
+                <li class="nav-item ml-3">
+                    <a class="ml-3 nav-link" href="https://school-2021.herokuapp.com/" target="_blank">heroku</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</th:block>
+
+</body>
+</html>

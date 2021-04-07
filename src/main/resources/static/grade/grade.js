@@ -39,3 +39,27 @@ function addGradeToStudentById() {
         }
     })
 }
+
+function addGrade() {
+    let student_id = $("#id_student").val();
+    let gradeValue = $("#id_student").val();
+    let grade = {
+        firstName: $firstName.val(),
+        lastName: $lastName.val(),
+        email: $email.val(),
+        birthDate: $birthDate.val()
+    };
+
+    console.log("addGrade(): " + element);
+    let url = "/rest/grade/" + element;
+    $.ajax({
+        url: url,
+        contentType: "application/json",
+        dataType: "json",
+        data: grade,
+        method: "POST",
+        success: function (result) {
+            console.log(result);
+        }
+    })
+}
