@@ -38,6 +38,11 @@ nav.navbar-light{
     margin-left: auto;
     margin-right: auto;
 }
+.list-group-custom{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
 #upButton {
     /*display: none; !* Hidden by default *!*/
     position: fixed; /* Fixed/sticky position */
