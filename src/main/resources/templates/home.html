@@ -8,17 +8,18 @@
 <body>
 <th:block th:insert="fragments/components :: nav"></th:block>
 <div class="main-wrapper justify-content-center">
+    <a id="button-top"></a>
     <h2>School diary:</h2>
 
 <!--    env section-->
     <ul class="list-group-custom list-group col-8">
         <li class="list-group-item list-group-item-primary">
-            <span class="badge badge-primary badge-pill">UAT</span>
-            <a class="" href="http://school-diary-artur-zaczek-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/" target="_blank">Open Shift test environment</a>
+            <span class="badge badge-primary badge-pill">PROD</span>
+            <a class="" href="http://school-diary-artur-zaczek-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/" target="_blank">Open Shift prod environment</a>
         </li>
         <li class="list-group-item list-group-item-primary">
-            <span class="badge badge-primary badge-pill">PROD</span>
-            <a class="" href="https://school-2021.herokuapp.com/" target="_blank">Heroku prod environment</a>
+            <span class="badge badge-primary badge-pill">UAT</span>
+            <a class="" href="https://school-2021.herokuapp.com/" target="_blank">Heroku test environment</a>
         </li>
     </ul>
 
@@ -26,8 +27,9 @@
     <div class="custom-alert alert alert-warning col-8 mt-4" role="alert">
         <h4>TODO's</h4>
         <ul>
-            <li>dodanie do encji studenta emaila</li>
-            <li>przycisk powrotu do gory strony</li>
+            <li>student profile, display/add grades</li>
+            <li>student form- clear after http post</li>
+            <li>language change-internationalization <a href="https://phrase.com/blog/posts/how-to-localize-spring-applications-like-a-pro/">article</a></li>
         </ul>
     </div>
 
@@ -47,8 +49,14 @@
             </thead>
             <tbody>
             <tr>
+                <th scope="row">0.21</th>
+                <td>08.04.2021</td>
+                <td>scroll to top button on home page, added email to student entity</td>
+                <td><a href="https://github.com/arturzaczek1" target="_blank">@arturzaczek1</a></td>
+            </tr>
+            <tr>
                 <th scope="row">0.20</th>
-                <td>07.04.2021</td>
+                <td>08.04.2021</td>
                 <td>Created env on Open Shift and successful deployed latest version - <a
                         href="http://school-diary-artur-zaczek-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/"
                         target="_blank">Open Shift</a></td>
@@ -175,7 +183,6 @@
         </table>
     </div>
 </div>
-<button id="upButton" onclick="topSC()" title="Go to top">Top</button>
 </body>
 <th:block th:insert="fragments/imports :: js_import"></th:block>
 

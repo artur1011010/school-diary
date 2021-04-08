@@ -8,10 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "STUDENT")
-public class Student extends BaseEntity{
+public class Student extends BaseEntity {
 
     private String firstName;
     private String lastName;
+    private String email;
     @Basic
     @Temporal(TemporalType.DATE)
     private Date birthDate;
@@ -19,19 +20,30 @@ public class Student extends BaseEntity{
     @JoinColumn(name = "id_student")
     private List<Grade> gradeList;
 
+
     public Student() {
     }
+
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = new Date(System.currentTimeMillis());
         super.addedDate = LocalDateTime.now();
     }
+
     public Student(String firstName, String lastName, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         super.addedDate = LocalDateTime.now();
         this.birthDate = birthDate;
+    }
+
+    public Student(String firstName, String lastName, Date birthDate, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        super.addedDate = LocalDateTime.now();
+        this.birthDate = birthDate;
+        this.email = email;
     }
 
     public List<Grade> getGradeList() {
@@ -41,14 +53,15 @@ public class Student extends BaseEntity{
     public void setGradeList(List<Grade> gradeList) {
         this.gradeList = gradeList;
     }
-    public void addToGradeList(Grade grade ){
-        if(gradeList == null){
+
+    public void addToGradeList(Grade grade) {
+        if (gradeList == null) {
             gradeList = new ArrayList<Grade>();
         }
         gradeList.add(grade);
     }
 
-    public LocalDateTime getAddedDate(){
+    public LocalDateTime getAddedDate() {
         return super.addedDate;
     }
 
@@ -66,6 +79,14 @@ public class Student extends BaseEntity{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getBirthDate() {
