@@ -15,6 +15,7 @@ public class Grade extends BaseEntity {
     private Professor professor;
     @OneToOne
     @JoinColumn(name = "id_subject")
+//    private Subject subject;
     private Subject subject;
     @ManyToOne
     private Student student;
@@ -26,9 +27,10 @@ public class Grade extends BaseEntity {
     public Grade(Integer gradeValue) {
         setGradeValue(gradeValue);
     }
-    public Grade(Professor professor, Subject subject, Integer gradeValue) {
-        this.professor = professor;
+
+    public Grade(Subject subject, Student student, Integer gradeValue) {
         this.subject = subject;
+        this.student = student;
         setGradeValue(gradeValue);
     }
 

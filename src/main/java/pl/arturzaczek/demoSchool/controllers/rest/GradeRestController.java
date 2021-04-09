@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.arturzaczek.demoSchool.model.entities.Grade;
 import pl.arturzaczek.demoSchool.model.entities.Student;
+import pl.arturzaczek.demoSchool.model.entities.Subject;
 import pl.arturzaczek.demoSchool.model.repositories.GradeRepository;
 import pl.arturzaczek.demoSchool.model.repositories.StudentRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -85,6 +87,11 @@ public class GradeRestController {
     @PostMapping("/grade/{student}")
     public Student addGradeToStudentById(@PathVariable String student, @RequestBody Grade grade) {
         logger.debug("url= /rest/grade/{student}, method=addGradeToStudentById(), STUDENT: " + student + " , GRADE: " + grade);
+        System.out.println("+++++++++++++++++++++++++++++ +++++++++++++++++++++++++");
+        System.out.println("student: " + student );
+        System.out.println("grade" + grade);
+        System.out.println("+++++++++++++++++++++++++++++ +++++++++++++++++++++++++");
+        grade.setSubject(new Subject("Maths"));
         Student resultStudent = new Student("Error", "wrong id");
         Long id = null;
         try {
@@ -97,7 +104,9 @@ public class GradeRestController {
         if (!byId.isPresent()) {
             return resultStudent;
         }
+        grade.setAddedDate(LocalDateTime.now());
         resultStudent = byId.get();
+        resultStudent.getGradeList().add(grade);
         studentRepository.save(resultStudent);
         return resultStudent;
     }
