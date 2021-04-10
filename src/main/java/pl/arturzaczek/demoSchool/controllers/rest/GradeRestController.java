@@ -4,13 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.arturzaczek.demoSchool.model.dto.GradeDTO;
 import pl.arturzaczek.demoSchool.model.entities.Grade;
 import pl.arturzaczek.demoSchool.model.entities.Student;
-import pl.arturzaczek.demoSchool.model.entities.Subject;
 import pl.arturzaczek.demoSchool.model.repositories.GradeRepository;
 import pl.arturzaczek.demoSchool.model.repositories.StudentRepository;
+import pl.arturzaczek.demoSchool.service.GradeService;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -20,21 +20,13 @@ public class GradeRestController {
     Logger logger = LoggerFactory.getLogger(GradeRestController.class);
     StudentRepository studentRepository;
     GradeRepository gradeRepository;
+    GradeService gradeService;
 
     @Autowired
-    public GradeRestController(StudentRepository studentRepository, GradeRepository gradeRepository) {
+    public GradeRestController(StudentRepository studentRepository, GradeRepository gradeRepository, GradeService gradeService) {
         this.studentRepository = studentRepository;
         this.gradeRepository = gradeRepository;
-    }
-
-    private Student getStudent(Long id) {
-        Student resultStudent = null;
-        Optional<Student> byId = studentRepository.findById(id);
-        if (!byId.isPresent()) {
-            return resultStudent;
-        }
-        resultStudent = byId.get();
-        return resultStudent;
+        this.gradeService = gradeService;
     }
 
     @PostMapping("/addGradeRest")
@@ -85,30 +77,18 @@ public class GradeRestController {
     }
 
     @PostMapping("/grade/{student}")
-    public Student addGradeToStudentById(@PathVariable String student, @RequestBody Grade grade) {
-        logger.debug("url= /rest/grade/{student}, method=addGradeToStudentById(), STUDENT: " + student + " , GRADE: " + grade);
-        System.out.println("+++++++++++++++++++++++++++++ +++++++++++++++++++++++++");
-        System.out.println("student: " + student );
-        System.out.println("grade" + grade);
-        System.out.println("+++++++++++++++++++++++++++++ +++++++++++++++++++++++++");
-        grade.setSubject(new Subject("Maths"));
+    public Boolean addGradeToStudentById(@PathVariable String student, @RequestBody GradeDTO gradeDTO) {
+        logger.debug("url= /rest/grade/{student}, method=addGradeToStudentById(), STUDENT: " + student + " , GRADE: " + gradeDTO);
         Student resultStudent = new Student("Error", "wrong id");
         Long id = null;
         try {
             id = Long.parseLong(student);
         }catch (Exception exception){
             logger.error("addGradeToStudentById() parse student id error: " +  student);
-            return resultStudent;
+            return false;
         }
-        Optional<Student> byId = studentRepository.findById(id);
-        if (!byId.isPresent()) {
-            return resultStudent;
-        }
-        grade.setAddedDate(LocalDateTime.now());
-        resultStudent = byId.get();
-        resultStudent.getGradeList().add(grade);
-        studentRepository.save(resultStudent);
-        return resultStudent;
+        Boolean aBoolean = gradeService.addGradeToStudentById(id, gradeDTO);
+        return aBoolean;
     }
 }
 
