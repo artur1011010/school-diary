@@ -54,7 +54,7 @@ function addGradeProfile() {
     let grade = {
         gradeValue: gradeValue,
         student: id,
-        // subject: subject
+        subject: subject
     }
     const stringGrade = JSON.stringify(grade);
     console.log("addGradeProfile(): " + id);
