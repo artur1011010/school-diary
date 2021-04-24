@@ -4,10 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.ListUtils;
 import pl.arturzaczek.demoSchool.model.entities.User;
 import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
 import pl.arturzaczek.demoSchool.service.StudentService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,17 +39,12 @@ public class StudentRestController {
         userRepository.save(user);
     }
 
-    @GetMapping("/add5Students")
-    public void add5Students(){
-        List userList = new ArrayList<User>();
-        userList.add(new User("Artur", "Aaaaa"));
-        userList.add(new User("Marcin", "Bbbbb"));
-        userList.add(new User("Mariusz", "Cccc"));
-        userList.add(new User("Anna", "Dddd"));
-        userList.add(new User("Kamila", "Eeeee"));
-        logger.debug("url= /rest/add5Students, method=add5Students() STUDENT LIST: " + userList);
-        userList.forEach(stu -> System.out.println(stu.toString()));
-        userRepository.saveAll(userList);
+    @GetMapping("/add20Students")
+    public void add20Students(){
+        List<User> randomUserM = studentService.createRandomUserM();
+        List<User> randomUserF = studentService.createRandomUserF();
+        randomUserM.addAll(randomUserF);
+        userRepository.saveAll(randomUserM);
     }
 
     @GetMapping("/student/{student_id}")

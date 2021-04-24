@@ -4,11 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.arturzaczek.demoSchool.model.entities.User;
 import pl.arturzaczek.demoSchool.model.repositories.GradeRepository;
 import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
-
+import java.time.LocalDate;
 import java.util.*;
-
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class StudentService {
@@ -23,24 +24,58 @@ public class StudentService {
         this.userRepository = userRepository;
     }
 
-    Set<String> studentNamesM = new HashSet<String>(
-            Set.of("Artur", "Michał", "Marcin", "Mateusz", "Krzysztof", "Cezary", "Maciej", "Piotr", "Paweł", "Adrian", "Kamil", "Sebastian"));
-    Set<String> studentNamesF = new HashSet<String>(
-            Set.of("Anna", "Dorota", "Katarzyna", "Karolina", "Justyna", "Beata", "Julia", "Marta", "Natalia", "Kamila", "Małgorzata"));
-    Set<String> studentLastNamesM = new HashSet<String>(
+    List<String> studentNamesM = new ArrayList<>(
+            Set.of("Artur", "Michał", "Marcin", "Mateusz", "Krzysztof", "Piotr", "Paweł", "Adrian", "Kamil", "Sebastian"));
+    List<String> studentNamesF = new ArrayList<>(
+            Set.of("Anna", "Dorota", "Katarzyna", "Justyna", "Beata", "Julia", "Marta", "Natalia", "Kamila", "Małgorzata"));
+    List<String> studentLastNamesM = new ArrayList<>(
             Set.of("Nowak", "Kowalski", "Wiśniewski", "Wójcik", "Kowalczyk", "Kamiński", "Lewandowski", "Zieliński", "Szymański", "Woźniak"));
-    Set<String> studentLastNamesF = new HashSet<String>(
-            Set.of("Nowak", "Kowalska", "Wiśniewska", "Wójcik", "Kowalczyk", "Kamińska", "Lewandowska", "Zielińska", "Szymańska", "Woźniak", "Dąbrowska"));
-    Set<String> emails = new HashSet<String>(
+    List<String> studentLastNamesF = new ArrayList<>(
+            Set.of("Nowak", "Kowalska", "Wiśniewska", "Kowalczyk", "Kamińska", "Lewandowska", "Zielińska", "Szymańska", "Woźniak", "Dąbrowska"));
+    List<String> emails = new ArrayList<>(
             Set.of("@tlen.pl", "@gmail.com", "@onet.pl", "@utlook.com", "@AOL.com"));
 
-    public void generateRandomStudent(Integer amount){
-//        int half = amount / 2;
-//
-//        System.out.println("++++++++++++++++++++");
-//        System.out.println(half);
-//        System.out.println("++++++++++++++++++++");
-//        Set studentSet = new HashSet<Student>();
-//        studentNamesM.
+    public List<User> createRandomUserM() {
+        Collections.shuffle(studentNamesM);
+        Collections.shuffle(studentLastNamesM);
+        Collections.shuffle(emails);
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < studentLastNamesM.size(); i++) {
+            User user = new User();
+            user.setFirstName(studentNamesM.get(i));
+            user.setLastName(studentLastNamesM.get(i));
+            user.setEmail(studentNamesM.get(i) + "." + studentLastNamesM.get(i) + emails.get(i / 2));
+            user.setBirthDate(between());
+            users.add(user);
+        }
+        return users;
+    }
+
+
+    public List<User> createRandomUserF() {
+        Collections.shuffle(studentNamesF);
+        Collections.shuffle(studentLastNamesF);
+        Collections.shuffle(emails);
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < studentLastNamesF.size(); i++) {
+            User user = new User();
+            user.setFirstName(studentNamesF.get(i));
+            user.setLastName(studentLastNamesF.get(i));
+            user.setEmail(studentNamesF.get(i) + "." + studentLastNamesF.get(i) + emails.get(i / 2));
+            user.setBirthDate(between());
+            users.add(user);
+        }
+        return users;
+    }
+
+    public LocalDate between() {
+        LocalDate startInclusive = LocalDate.of(1970, 1, 1);
+        LocalDate endExclusive = LocalDate.of(2005, 12, 30);
+        long startEpochDay = startInclusive.toEpochDay();
+        long endEpochDay = endExclusive.toEpochDay();
+        long randomDay = ThreadLocalRandom
+                .current()
+                .nextLong(startEpochDay, endEpochDay);
+        return LocalDate.ofEpochDay(randomDay);
     }
 }

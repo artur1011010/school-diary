@@ -12,13 +12,13 @@ function getStudentsList() {
     })
 }
 
-function add5Students() {
-    console.log("add5Students(): ");
+function add20Students() {
+    console.log("add20Students(): ");
     setTimeout(function () {
         getStudentsList();
     }, 300);
     $.ajax({
-        url: "/rest/add5Students",
+        url: "/rest/add20Students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
@@ -35,6 +35,7 @@ function populateStudentsList(input) {
                 student_id: element.id,
                 firstName: element.firstName,
                 lastName: element.lastName,
+                email: element.email,
                 birthDate: element.birthDate,
                 gradeList: parseGradeListintoString(element.gradeList),
             });
@@ -81,7 +82,7 @@ function deleteStudentById(student_id) {
     let url = "/rest/student/" + student_id;
     setTimeout(function () {
         getStudentsList();
-    }, 50);
+    }, 200);
     $.ajax({
         url: url,
         contentType: "application/json",

@@ -54,7 +54,7 @@ function parseGrade(grade){
 }
 function addGradeProfile() {
     let id = $("#id_student-details").val();
-    let subjectName = $("#add-grade-subject").val();
+    let subjectName = $("#add-grade-subject1").val();
     let gradeValue = $("#add-grade-value").val();
     let gradeDTO = {
         gradeValue: gradeValue,
@@ -75,5 +75,5 @@ function addGradeProfile() {
             console.log(result);
         }
     })
-    setTimeout(function(){ populateProfile(); }, 200);
+    setTimeout(function(){ getStudentDetails();}, 200);
 }

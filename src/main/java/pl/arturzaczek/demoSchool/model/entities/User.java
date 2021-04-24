@@ -1,6 +1,7 @@
 package pl.arturzaczek.demoSchool.model.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,8 +15,7 @@ public class User extends BaseEntity {
     private String lastName;
     private String email;
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, orphanRemoval = true)
 //    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 //    @OneToMany(mappedBy = "student")
@@ -28,20 +28,19 @@ public class User extends BaseEntity {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = new Date(System.currentTimeMillis());
     }
 
-    public User(String firstName, String lastName, Date birthDate) {
+    public User(String firstName, String lastName, LocalDate birthDate) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
-        super.addedDate = LocalDateTime.now();
     }
 
-    public User(String firstName, String lastName, Date birthDate, String email) {
+    public User(String firstName, String lastName, LocalDate birthDate, String email) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
-        super.addedDate = LocalDateTime.now();
         this.birthDate = birthDate;
         this.email = email;
     }
@@ -90,11 +89,11 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
