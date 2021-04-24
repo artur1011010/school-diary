@@ -10,59 +10,44 @@ import javax.persistence.*;
 @Table(name = "GRADE")
 public class Grade extends BaseEntity {
 
-    @OneToOne
-    @JoinColumn(name = "id_professor")
-    private Professor professor;
-    @OneToOne
-    @JoinColumn(name = "id_subject")
-//    private Subject subject;
-    private Subject subject;
-    @ManyToOne
-    private Student student;
+    private String subject;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id")
+    private Long userId;
     private Integer gradeValue;
-
 
     public Grade() {
     }
+
     public Grade(Integer gradeValue) {
         setGradeValue(gradeValue);
     }
 
-    public Grade(Subject subject, Student student, Integer gradeValue) {
-        this.subject = subject;
-        this.student = student;
+    public Grade(Integer gradeValue, String subject) {
         setGradeValue(gradeValue);
-    }
-
-    public Grade(Professor professor, Subject subject, Student student, Integer gradeValue) {
-        this.professor = professor;
         this.subject = subject;
-        this.student = student;
+    }
+
+    public Grade(Integer gradeValue, String subject, Long userId) {
         setGradeValue(gradeValue);
+        this.subject = subject;
+        this.userId = userId;
     }
 
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
-    public Subject getSubject() {
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(Subject subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public Student getStudent() {
-        return student;
+    public Long getStudent() {
+        return userId;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudent(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getGradeValue() {
@@ -72,7 +57,7 @@ public class Grade extends BaseEntity {
     public void setGradeValue(Integer gradeValue) {
         if (gradeValue > 100 || gradeValue < 0) {
             Logger logger = LoggerFactory.getLogger(StudentRestController.class);
-            logger.error("setGradeValue(), wrong value " +  gradeValue + ", value set on 0");
+            logger.error("setGradeValue(), wrong value " + gradeValue + ", value set on 0");
             this.gradeValue = 0;
             return;
         }
@@ -82,7 +67,6 @@ public class Grade extends BaseEntity {
     @Override
     public String toString() {
         return "Grade: " +
-                "professor: " + professor +
                 ", subject: " + subject +
                 ", gradeValue: " + gradeValue +
                 "id: " + super.id;

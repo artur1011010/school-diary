@@ -1,6 +1,11 @@
 // TODO get student details
 function getStudentDetails(){
     let id_student = $('#id_student-details').val();
+    if(!id_student){
+        let profile_id = $('#profile_id').val();
+        console.log("id_student: " + profile_id );
+        id_student = profile_id;
+    }
     console.log("getStudentDetails()");
     $.ajax({
         url: "/rest/student/" + id_student,
@@ -49,15 +54,16 @@ function parseGrade(grade){
 }
 function addGradeProfile() {
     let id = $("#id_student-details").val();
-    let subject = $("#add-grade-subject").val();
+    let subjectName = $("#add-grade-subject").val();
     let gradeValue = $("#add-grade-value").val();
-    let grade = {
+    let gradeDTO = {
         gradeValue: gradeValue,
-        student: id,
-        subject: subject
+        subjectName: subjectName
     }
-    const stringGrade = JSON.stringify(grade);
     console.log("addGradeProfile(): " + id);
+    console.log("grade " + gradeDTO);
+    console.log("subject " + subjectName);
+    const stringGrade = JSON.stringify(gradeDTO);
     let url = "/rest/grade/" + id;
     $.ajax({
         url: url,

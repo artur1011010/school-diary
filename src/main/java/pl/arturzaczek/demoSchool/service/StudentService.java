@@ -5,11 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.arturzaczek.demoSchool.model.repositories.GradeRepository;
-import pl.arturzaczek.demoSchool.model.repositories.StudentRepository;
-import pl.arturzaczek.demoSchool.model.repositories.SubjectRepository;
+import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -17,23 +15,32 @@ public class StudentService {
 
     Logger logger = LoggerFactory.getLogger(StudentService.class);
     GradeRepository gradeRepository;
-    StudentRepository studentRepository;
-    SubjectRepository subjectRepository;
+    UserRepository userRepository;
 
     @Autowired
-    public StudentService(GradeRepository gradeRepository, StudentRepository studentRepository, SubjectRepository subjectRepository) {
+    public StudentService(GradeRepository gradeRepository, UserRepository userRepository) {
         this.gradeRepository = gradeRepository;
-        this.studentRepository = studentRepository;
-        this.subjectRepository = subjectRepository;
+        this.userRepository = userRepository;
     }
 
-    List<String> studentNamesM = new ArrayList<>(
-            List.of("Artur", "Michał", "Marcin", "Mateusz", "Krzysztof", "Cezary", "Maciej", "Piotr", "Paweł", "Adrian", "Kamil", "Sebastian"));
-    List<String> studentNamesF = new ArrayList<>(
-            List.of("Anna", "Dorota", "Katarzyna", "Karolina", "Justyna", "Beata", "Julia", "Marta", "Natalia", "Kamila", "Małgorzata"));
-    List<String> studentLastNamesM = new ArrayList<>(
-            List.of("Nowak", "Kowalski", "Wiśniewski", "Wójcik", "Kowalczyk", "Kamiński", "Lewandowski", "Zieliński", "Szymański", "Woźniak"));
-    List<String> studentLastNamesF = new ArrayList<>(
-            List.of("Nowak", "Kowalska", "Wiśniewska", "Wójcik", "Kowalczyk", "Kamińska", "Lewandowska", "Zielińska", "Szymańska", "Woźniak", "Dąbrowska"));
+    Set<String> studentNamesM = new HashSet<String>(
+            Set.of("Artur", "Michał", "Marcin", "Mateusz", "Krzysztof", "Cezary", "Maciej", "Piotr", "Paweł", "Adrian", "Kamil", "Sebastian"));
+    Set<String> studentNamesF = new HashSet<String>(
+            Set.of("Anna", "Dorota", "Katarzyna", "Karolina", "Justyna", "Beata", "Julia", "Marta", "Natalia", "Kamila", "Małgorzata"));
+    Set<String> studentLastNamesM = new HashSet<String>(
+            Set.of("Nowak", "Kowalski", "Wiśniewski", "Wójcik", "Kowalczyk", "Kamiński", "Lewandowski", "Zieliński", "Szymański", "Woźniak"));
+    Set<String> studentLastNamesF = new HashSet<String>(
+            Set.of("Nowak", "Kowalska", "Wiśniewska", "Wójcik", "Kowalczyk", "Kamińska", "Lewandowska", "Zielińska", "Szymańska", "Woźniak", "Dąbrowska"));
+    Set<String> emails = new HashSet<String>(
+            Set.of("@tlen.pl", "@gmail.com", "@onet.pl", "@utlook.com", "@AOL.com"));
 
+    public void generateRandomStudent(Integer amount){
+//        int half = amount / 2;
+//
+//        System.out.println("++++++++++++++++++++");
+//        System.out.println(half);
+//        System.out.println("++++++++++++++++++++");
+//        Set studentSet = new HashSet<Student>();
+//        studentNamesM.
+    }
 }

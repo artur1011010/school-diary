@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "STUDENT")
-public class Student extends BaseEntity {
+@Table(name = "USER")
+public class User extends BaseEntity {
 
     private String firstName;
     private String lastName;
@@ -16,29 +16,29 @@ public class Student extends BaseEntity {
     @Basic
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_student")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, orphanRemoval = true)
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @OneToMany(mappedBy = "student")
     private List<Grade> gradeList;
 
-
-    public Student() {
+    public User() {
     }
 
-    public Student(String firstName, String lastName) {
+    public User(String firstName, String lastName) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = new Date(System.currentTimeMillis());
-        super.addedDate = LocalDateTime.now();
     }
 
-    public Student(String firstName, String lastName, Date birthDate) {
+    public User(String firstName, String lastName, Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
-        super.addedDate = LocalDateTime.now();
         this.birthDate = birthDate;
+        super.addedDate = LocalDateTime.now();
     }
 
-    public Student(String firstName, String lastName, Date birthDate, String email) {
+    public User(String firstName, String lastName, Date birthDate, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         super.addedDate = LocalDateTime.now();
@@ -60,6 +60,7 @@ public class Student extends BaseEntity {
         }
         gradeList.add(grade);
     }
+
 
     public LocalDateTime getAddedDate() {
         return super.addedDate;
@@ -99,10 +100,14 @@ public class Student extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Student: " +
-                "id:" + id +
-                ", name: " + firstName +
-                ", last name: " + lastName +
-                ", birthDate: " + birthDate;
+        return "User{" +
+                "id=" + id +
+                ", addedDate=" + addedDate +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", gradeList=" + gradeList +
+                '}';
     }
 }

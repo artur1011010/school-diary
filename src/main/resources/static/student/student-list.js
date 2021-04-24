@@ -5,6 +5,7 @@ function getStudentsList() {
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
+            console.log(result);
             populateStudentsList(result);
             console.log(result);
         }
@@ -13,7 +14,9 @@ function getStudentsList() {
 
 function add5Students() {
     console.log("add5Students(): ");
-    setTimeout(function(){ getStudentsList(); }, 200);
+    setTimeout(function () {
+        getStudentsList();
+    }, 300);
     $.ajax({
         url: "/rest/add5Students",
         contentType: "application/json",
@@ -63,8 +66,10 @@ function detailFormatter(index, row) {
     $.each(row, function (key, value) {
         html.push('<p><b>' + key + ':  </b>' + value + '</p>')
     })
-    let deleteButton = "<button type ='button' onClick='deleteStudentById("+ row.student_id + ")' className='custom-button delete-button'>delete student</button>"
-    return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + deleteButton + "</div>";
+    const deleteButton = "<button type ='button' onClick='deleteStudentById(" + row.student_id + ")' class='btn btn-warning mr-2'>delete student</button>";
+    const goToProfileButton = "<a type ='button' href='/studentProfile/" + row.student_id + "' " +
+    "class='btn btn-primary'>student profile</a>";
+    return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + deleteButton + " " + goToProfileButton + "</div>";
 }
 
 /**
@@ -74,7 +79,9 @@ function detailFormatter(index, row) {
 function deleteStudentById(student_id) {
     console.log("deleteButton(element):  " + student_id);
     let url = "/rest/student/" + student_id;
-    setTimeout(function(){ getStudentsList(); }, 50);
+    setTimeout(function () {
+        getStudentsList();
+    }, 50);
     $.ajax({
         url: url,
         contentType: "application/json",

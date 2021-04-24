@@ -2,3 +2,6 @@
     text-align: left;
     padding: 30px;
 }
+#profile_id{
+    display: none;
+}

@@ -12,6 +12,10 @@ public abstract class BaseEntity {
     @Column (name = "added_date")
     protected LocalDateTime addedDate;
 
+    public BaseEntity() {
+        this.addedDate = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
