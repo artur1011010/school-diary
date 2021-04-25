@@ -25,22 +25,24 @@ public class StudentService {
     }
 
     List<String> studentNamesM = new ArrayList<>(
-            Set.of("Artur", "Michał", "Marcin", "Mateusz", "Krzysztof", "Piotr", "Paweł", "Adrian", "Kamil", "Sebastian"));
+            Set.of("Artur", "Michał", "Marcin", "Mateusz", "Krzysztof", "Piotr", "Paweł", "Adrian", "Kamil", "Sebastian", "Przemysław", "Dawid", "Karol", "Tomasz", "Wojciech"));
     List<String> studentNamesF = new ArrayList<>(
-            Set.of("Anna", "Dorota", "Katarzyna", "Justyna", "Beata", "Julia", "Marta", "Natalia", "Kamila", "Małgorzata"));
+            Set.of("Anna", "Dorota", "Katarzyna", "Justyna", "Beata", "Julia", "Marta", "Natalia", "Kamila", "Małgorzata", "Karolina", "Klaudia", "Magdalena", "Ewa"));
     List<String> studentLastNamesM = new ArrayList<>(
-            Set.of("Nowak", "Kowalski", "Wiśniewski", "Wójcik", "Kowalczyk", "Kamiński", "Lewandowski", "Zieliński", "Szymański", "Woźniak"));
+            Set.of("Nowak", "Kowalski", "Wiśniewski", "Wójcik", "Kowalczyk", "Kamiński", "Grabowski",
+                    "Lewandowski", "Zieliński", "Szymański", "Woźniak","Kozłowski", "Mazur", "Krawczyk","Kaczmarek", "Pawłowski", "Zając", "Baran", "Borkowski"));
     List<String> studentLastNamesF = new ArrayList<>(
-            Set.of("Nowak", "Kowalska", "Wiśniewska", "Kowalczyk", "Kamińska", "Lewandowska", "Zielińska", "Szymańska", "Woźniak", "Dąbrowska"));
+            Set.of("Nowak", "Kowalska", "Wiśniewska", "Kowalczyk", "Kamińska", "Lewandowska", "Zielińska","Sikora", "Pawlak","Adamczyk", "Dudek", "Jaworska",
+                    "Szymańska", "Woźniak", "Dąbrowska","Krawczyk", "Olszewska"));
     List<String> emails = new ArrayList<>(
-            Set.of("@tlen.pl", "@gmail.com", "@onet.pl", "@utlook.com", "@AOL.com"));
+            List.of("@tlen.pl", "@gmail.com", "@onet.pl", "@outlook.com", "@AOL.com", "@gmail.com"));
 
     public List<User> createRandomUserM() {
         Collections.shuffle(studentNamesM);
         Collections.shuffle(studentLastNamesM);
         Collections.shuffle(emails);
         List<User> users = new ArrayList<>();
-        for (int i = 0; i < studentLastNamesM.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setFirstName(studentNamesM.get(i));
             user.setLastName(studentLastNamesM.get(i));
@@ -57,7 +59,7 @@ public class StudentService {
         Collections.shuffle(studentLastNamesF);
         Collections.shuffle(emails);
         List<User> users = new ArrayList<>();
-        for (int i = 0; i < studentLastNamesF.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setFirstName(studentNamesF.get(i));
             user.setLastName(studentLastNamesF.get(i));

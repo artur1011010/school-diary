@@ -1,9 +1,9 @@
-// TODO get student details
-function getStudentDetails(){
+function getStudentDetails() {
     let id_student = $('#id_student-details').val();
-    if(!id_student){
-        let profile_id = $('#profile_id').val();
-        console.log("id_student: " + profile_id );
+    console.log("id_student " + id_student);
+    if (!id_student) {
+        let profile_id = $('#profile_id').html();
+        console.log("id_student: " + profile_id);
         id_student = profile_id;
     }
     console.log("getStudentDetails()");
@@ -33,36 +33,42 @@ function populateProfile(data) {
     $birthDate.val(data.birthDate);
 }
 
-function populateGrades(grades){
+function populateGrades(grades) {
     let result = '';
-    grades.forEach(grade=> result += parseGrade(grade));
+    grades.forEach(grade => result += parseGrade(grade));
     $('#grade-list').html(result);
 }
 
-function parseGrade(grade){
+function parseGrade(grade) {
     let result = ''
-    if(grade.gradeValue < 30){
-        result =  '<span class="badge badge-danger">' + grade.subject + ':  ' +  grade.gradeValue + '</span></br>';
-    }else if(grade.gradeValue >=30 && grade.gradeValue < 50 ){
-        result =  '<span class="badge badge-warning">' + grade.subject + ':  ' +  grade.gradeValue + '</span></br>';
-    }else if(grade.gradeValue >= 50 && grade.gradeValue < 70 ){
-        result =  '<span class="badge badge-secondary">' + grade.subject + ':  ' +  grade.gradeValue + '</span></br>';
-    }else if(grade.gradeValue >= 70){
-        result =  '<span class="badge badge-success">Subject: ' + grade.subject + ':  ' +  grade.gradeValue + '</span></br>';
+    if (grade.gradeValue < 30) {
+        result = '<span class="badge badge-danger">' + grade.subject + ':  ' + grade.gradeValue + '</span></br>';
+    } else if (grade.gradeValue >= 30 && grade.gradeValue < 50) {
+        result = '<span class="badge badge-warning">' + grade.subject + ':  ' + grade.gradeValue + '</span></br>';
+    } else if (grade.gradeValue >= 50 && grade.gradeValue < 70) {
+        result = '<span class="badge badge-secondary">' + grade.subject + ':  ' + grade.gradeValue + '</span></br>';
+    } else if (grade.gradeValue >= 70) {
+        result = '<span class="badge badge-success">Subject: ' + grade.subject + ':  ' + grade.gradeValue + '</span></br>';
     }
     return result;
 }
+
 function addGradeProfile() {
     let id = $("#id_student-details").val();
+    if (!id) {
+        id = $("#profile_id").html();
+    }
     let subjectName = $("#add-grade-subject1").val();
     let gradeValue = $("#add-grade-value").val();
     let gradeDTO = {
         gradeValue: gradeValue,
         subjectName: subjectName
     }
-    console.log("addGradeProfile(): " + id);
-    console.log("grade " + gradeDTO);
-    console.log("subject " + subjectName);
+    //TODO - delete
+
+    // console.log("addGradeProfile(): " + id);
+    // console.log("grade " + gradeDTO);
+    // console.log("subject " + subjectName);
     const stringGrade = JSON.stringify(gradeDTO);
     let url = "/rest/grade/" + id;
     $.ajax({
@@ -75,5 +81,7 @@ function addGradeProfile() {
             console.log(result);
         }
     })
-    setTimeout(function(){ getStudentDetails();}, 200);
+    setTimeout(function () {
+        getStudentDetails();
+    }, 200);
 }

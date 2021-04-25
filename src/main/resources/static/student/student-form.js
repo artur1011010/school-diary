@@ -4,16 +4,8 @@ function validationInput() {
     const $lastName = $('#last-name');
     const $email = $('#email');
     const $birthDate = $('#birth-date');
-//TODO - sprobowac to zrobic krocej
-    $firstName.removeClass('is-invalid');
-    $firstName.removeClass('is-valid');
-    $lastName.removeClass('is-invalid');
-    $lastName.removeClass('is-valid');
-    $email.removeClass('is-invalid');
-    $email.removeClass('is-valid');
-    $birthDate.removeClass('is-invalid');
-    $birthDate.removeClass('is-valid');
-    //
+    clearFormValidationClasses();
+
     if ($firstName.val().length < 1) {
         $firstName.addClass('is-invalid');
         result = false;
@@ -47,7 +39,6 @@ function validationInput() {
 
 function addStudent() {
     if (!validationInput()) {
-        console.log("validationInput: " + validationInput());
         return;
     }
     let $firstName = $('#first-name');
@@ -73,6 +64,8 @@ function addStudent() {
             console.log(result);
         }
     })
+    clearForm();
+    triggerSuccessAlert();
 }
 
 function validateEmail(email) {
@@ -98,4 +91,35 @@ function validateDate(dateString) {
         monthLength[1] = 29;
     // Check the range of the day
     return day > 0 && day <= monthLength[month - 1];
+}
+
+function clearForm() {
+    $('#first-name').val("");
+    $('#last-name').val("");
+    $('#email').val("");
+    $('#birth-date').val("");
+    clearFormValidationClasses();
+}
+
+function clearFormValidationClasses(){
+    let $firstName = $('#first-name');
+    let $lastName = $('#last-name');
+    let $email = $('#email');
+    let $birthDate = $('#birth-date');
+    $firstName.removeClass('is-invalid');
+    $firstName.removeClass('is-valid');
+    $lastName.removeClass('is-invalid');
+    $lastName.removeClass('is-valid');
+    $email.removeClass('is-invalid');
+    $email.removeClass('is-valid');
+    $birthDate.removeClass('is-invalid');
+    $birthDate.removeClass('is-valid');
+}
+
+function triggerSuccessAlert(){
+    let $success = $('#success-msg');
+    $success.css('visibility', 'visible');
+    setTimeout( function (){
+        $success.css('visibility', 'hidden')
+    }, 3000)
 }

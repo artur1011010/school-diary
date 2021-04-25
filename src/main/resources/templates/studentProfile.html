@@ -10,11 +10,12 @@
 <div class="main-wrapper">
     <div class="row form-basic mt-3 justify-content-center">
         <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12">
-            <div class="input-group mb-3 id_student">
-                <input id="id_student-details" type="number" class="form-control" placeholder="id studenta">
-            </div>
+            <!--                TODO - deprecated -->
+<!--            <div class="input-group mb-3 id_student">-->
+<!--                <input id="id_student-details" type="number" class="form-control" placeholder="id studenta">-->
+<!--            </div>-->
             <div id="profile_id" th:text="${student_id}"></div>
-            <button type="button" onclick="getStudentDetails()" class="btn btn-primary">getStudentDetails</button>
+<!--            <button type="button" onclick="getStudentDetails()" class="btn btn-primary">getStudentDetails</button>-->
             <h4>Student profile:</h4>
             <div class="input-group mb-3">
                 <input type="text" id="id-details" class="form-control rounded-right" placeholder="id" disabled="true" value="testowe ID">
@@ -62,52 +63,17 @@
                     Proszę o podanie prawidłowej daty urodzenia (1960-2005)
                 </div>
             </div>
-<!--        jumbotron -->
-<!--            <div class="jumbotron custom-marks">-->
-<!--                <div class="form-group">-->
-<!--                    <label for="add-grade-value">Select Grade</label>-->
-<!--                    <select class="form-control" id="add-grade-value">-->
-<!--                        <option>10</option>-->
-<!--                        <option>20</option>-->
-<!--                        <option>30</option>-->
-<!--                        <option>40</option>-->
-<!--                        <option>50</option>-->
-<!--                        <option>60</option>-->
-<!--                        <option>70</option>-->
-<!--                        <option>80</option>-->
-<!--                        <option>90</option>-->
-<!--                        <option>100</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="add-grade-subject">Select Subject</label>-->
-<!--                    <select class="form-control" id="add-grade-subject">-->
-<!--                        <option>English</option>-->
-<!--                        <option>Maths</option>-->
-<!--                        <option>Science</option>-->
-<!--                        <option>History</option>-->
-<!--                        <option>Geography</option>-->
-<!--                        <option>Physical education</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <button type="button" onclick="addGradeProfile()" class="btn btn-secondary">Add</button>-->
-<!--                <p class="lead ">Grades:</p>-->
-<!--                <hr class="my-4">-->
-<!--                <div id="grade-list"></div>-->
-<!--            </div>-->
-
 <!--            MODAL-->
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-grade-modal">
                 Add grade
             </button>
-
             <!-- Modal -->
             <div class="modal fade" id="add-grade-modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add grade</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

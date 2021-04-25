@@ -10,24 +10,25 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
               integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
               crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" th:href="@{main.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{lib/bootstrap-table.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{~/main.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{~/lib/bootstrap-table.min.css}">
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     </th:block>
 
     <th:block th:fragment="student-liks">
-        <link rel="stylesheet" type="text/css" th:href="@{student/student.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{student/student-form.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{student/student-list.css}">
-        <script th:src="@{student/student.js}"></script>
-        <script th:src="@{student/student-form.js}"></script>
-        <script th:src="@{student/student-list.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{~/student/student.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{~/student/student-form.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{~/student/student-list.css}">
+        <script th:src="@{~/student/student.js}"></script>
+        <script th:src="@{~/student/student-form.js}"></script>
+        <script th:src="@{~/student/student-list.js}"></script>
     </th:block>
 
     <th:block th:fragment="grade-liks">
-        <link rel="stylesheet" type="text/css" th:href="@{grade/grade.css}">
-        <script th:src="@{grade/grade.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{~/grade/grade.css}">
+        <script th:src="@{~/grade/grade.js}"></script>
     </th:block>
 </head>
 <body>
@@ -41,8 +42,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script th:src="@{lib/bootstrap-table.min.js}"></script>
-    <script th:src="@{main.js}"></script>
+    <script th:src="@{~/lib/bootstrap-table.min.js}"></script>
+    <script th:src="@{~/main.js}"></script>
 </th:block>
 </body>
 </html>
