@@ -1,3 +1,11 @@
+$( function() {
+    $( ".accordion" ).accordion({
+        active: false,
+        collapsible: true,
+        animate: 200
+    })
+} );
+
 function getStudentDetails() {
     let id_student = $('#id_student-details').val();
     console.log("id_student " + id_student);

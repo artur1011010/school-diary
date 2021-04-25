@@ -70,7 +70,7 @@ public class StudentService {
         return users;
     }
 
-    public LocalDate between() {
+    private LocalDate between() {
         LocalDate startInclusive = LocalDate.of(1970, 1, 1);
         LocalDate endExclusive = LocalDate.of(2005, 12, 30);
         long startEpochDay = startInclusive.toEpochDay();

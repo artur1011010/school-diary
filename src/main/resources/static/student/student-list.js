@@ -67,18 +67,19 @@ function detailFormatter(index, row) {
     $.each(row, function (key, value) {
         html.push('<p><b>' + key + ':  </b>' + value + '</p>')
     })
-    const deleteButton = "<button type ='button' onClick='deleteStudentById(" + row.student_id + ")' data-toggle='modal'  data-target='#deleteModal' class='btn btn-warning mr-2'>delete student</button>";
+    // const deleteButton = "<button type ='button' onClick='deleteStudentById(" + row.student_id + ")' data-toggle='modal'  data-target='#deleteModal' class='btn btn-warning mr-2'>delete student</button>";
+    const deleteButton = "<button type ='button' data-toggle='modal'  data-target='#deleteModal' class='btn btn-warning mr-2'>delete student</button>";
     const goToProfileButton = "<a type ='button' href='../studentProfile/" + row.student_id + "' " +
         "class='btn btn-primary'>Student profile</a>";
 
     const modal = '<div class="modal fade" id="deleteModal" tabIndex="-1" role="dialog"><div class="modal-dialog" role="document">' +
         '<div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="deleteModal">Are you sure want to delete user?</h5>' +
-        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>' +
-        '</button></div><div class="modal-body">modal body</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> ' +
-        '<button type="button" class="btn btn-primary" onClick="deleteStudentById(' + row.student_id + ')" >Delete user</button></div></div></div></div>';
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+        '</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> ' +
+        '<button type="button" class="btn btn-primary" onClick="deleteStudentById(' + row.student_id + ')" data-dismiss="modal">Delete user</button></div></div></div></div>';
 
     return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + deleteButton + " " +
-        goToProfileButton + modal + "</div>";
+        goToProfileButton +  modal + "</div>";
 }
 
 

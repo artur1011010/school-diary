@@ -11,14 +11,15 @@
     <div class="row form-basic mt-3 justify-content-center">
         <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12">
             <!--                TODO - deprecated -->
-<!--            <div class="input-group mb-3 id_student">-->
-<!--                <input id="id_student-details" type="number" class="form-control" placeholder="id studenta">-->
-<!--            </div>-->
+            <!--            <div class="input-group mb-3 id_student">-->
+            <!--                <input id="id_student-details" type="number" class="form-control" placeholder="id studenta">-->
+            <!--            </div>-->
             <div id="profile_id" th:text="${student_id}"></div>
-<!--            <button type="button" onclick="getStudentDetails()" class="btn btn-primary">getStudentDetails</button>-->
+            <!--            <button type="button" onclick="getStudentDetails()" class="btn btn-primary">getStudentDetails</button>-->
             <h4>Student profile:</h4>
             <div class="input-group mb-3">
-                <input type="text" id="id-details" class="form-control rounded-right" placeholder="id" disabled="true" value="testowe ID">
+                <input type="text" id="id-details" class="form-control rounded-right" placeholder="id" disabled="true"
+                       value="testowe ID">
                 <div class="valid-feedback">
                     Ok!
                 </div>
@@ -27,7 +28,8 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" id="first-name-details" class="form-control rounded-right" placeholder="imie" disabled="true" value="testowe imie">
+                <input type="text" id="first-name-details" class="form-control rounded-right" placeholder="imie"
+                       disabled="true" value="testowe imie">
                 <div class="valid-feedback">
                     Ok!
                 </div>
@@ -36,7 +38,8 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" id="last-name-details" class="form-control rounded-right" placeholder="nazwisko" disabled="true" value="testowe nazwisko">
+                <input type="text" id="last-name-details" class="form-control rounded-right" placeholder="nazwisko"
+                       disabled="true" value="testowe nazwisko">
                 <div class="valid-feedback">
                     Ok!
                 </div>
@@ -45,7 +48,8 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" id="email-details" class="form-control rounded-right" placeholder="email" disabled="true" value="testowy email">
+                <input type="text" id="email-details" class="form-control rounded-right" placeholder="email"
+                       disabled="true" value="testowy email">
                 <div class="valid-feedback">
                     Ok!
                 </div>
@@ -55,7 +59,9 @@
             </div>
             <label for="birth-date-details" class="form-label">Data urodzenia</label>
             <div class="input-group mb-3">
-                <input type="date" id="birth-date-details" class="form-control datepicker rounded-right" placeholder="data urodzenia"  min="1960-01-01" max="2005-12-31" disabled="true" value="2005-12-31">
+                <input type="date" id="birth-date-details" class="form-control datepicker rounded-right"
+                       placeholder="data urodzenia" min="1960-01-01" max="2005-12-31" disabled="true"
+                       value="2005-12-31">
                 <div class="valid-feedback">
                     Ok!
                 </div>
@@ -63,7 +69,7 @@
                     Proszę o podanie prawidłowej daty urodzenia (1960-2005)
                 </div>
             </div>
-<!--            MODAL-->
+            <!--            MODAL-->
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-grade-modal">
                 Add grade
@@ -107,18 +113,38 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" onclick="getStudentDetails()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="addGradeProfile()" data-dismiss="modal" class="btn btn-primary">Save grade</button>
+                            <button type="button" onclick="getStudentDetails()" class="btn btn-secondary"
+                                    data-dismiss="modal">Close
+                            </button>
+                            <button type="button" onclick="addGradeProfile()" data-dismiss="modal"
+                                    class="btn btn-primary">Save grade
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="lead ">Grades:</p>
+
+
             <hr class="my-4">
+            <p class="lead ">Grades:</p>
             <div id="grade-list"></div>
+            <div class="accordion" style="margin-bottom: 20px;">
+                <h6 class="row alert-primary" style="padding: 10px;">Student grades</h6>
+                <table class="table-primary table-hover table-sm col-12">
+                    <tr class='row'>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
+                    </tr>
+                    <tr>
+                        <td>It is a long established fact that a reader will be distracted by the</td>
+                        <td>default model text, and a search for 'lorem ipsum' will uncover</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
 <th:block th:insert="fragments/imports :: js_import"></th:block>
 <script>getStudentDetails()</script>
 </body>

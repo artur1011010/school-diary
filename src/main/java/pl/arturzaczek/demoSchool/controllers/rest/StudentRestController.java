@@ -4,13 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.ListUtils;
 import pl.arturzaczek.demoSchool.model.entities.User;
 import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
 import pl.arturzaczek.demoSchool.service.StudentService;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +49,7 @@ public class StudentRestController {
         logger.debug("url= /rest/student/{student_id}, method=getStudentById() STUDENT: " + student_id);
         Long long_id = Long.parseLong(student_id+"");
         Optional<User> byId = userRepository.findById(long_id);
-        if(!byId.isPresent()){
+        if(byId.isEmpty()){
             logger.warn("deleteStudentById() rest " + student_id);
             return null;
         }
@@ -66,7 +63,7 @@ public class StudentRestController {
         logger.debug("url= /rest/student/{student_id}, method=deleteStudentById() STUDENT: " + student_id);
         Long long_id = Long.parseLong(student_id+"");
         Optional<User> byId = userRepository.findById(long_id);
-        if(!byId.isPresent()){
+        if(byId.isEmpty()){
             logger.warn("deleteStudentById() rest " + student_id);
             return "not found: " + student_id;
         }
