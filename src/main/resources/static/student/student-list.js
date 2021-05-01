@@ -1,19 +1,18 @@
 function getStudentsList() {
-    console.log("getStudentsList()")
+    // console.log("getStudentsList()")
     $.ajax({
         url: "/rest/students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
-            console.log(result);
+            // console.log(result);
             populateStudentsList(result);
-            console.log(result);
         }
     })
 }
 
 function add20Students() {
-    console.log("add20Students(): ");
+    // console.log("add20Students(): ");
     setTimeout(function () {
         getStudentsList();
     }, 300);
@@ -22,7 +21,7 @@ function add20Students() {
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
-            console.log(result);
+            // console.log(result);
         }
     })
 }
@@ -88,7 +87,7 @@ function detailFormatter(index, row) {
  * usunać time out, przerobic to tak zeby po odpowiedzi serwera odswiezalo tabele
  */
 function deleteStudentById(student_id) {
-    console.log("deleteButton(element):  " + student_id);
+    // console.log("deleteButton(element):  " + student_id);
     let url = "/rest/student/" + student_id;
     setTimeout(function () {
         getStudentsList();

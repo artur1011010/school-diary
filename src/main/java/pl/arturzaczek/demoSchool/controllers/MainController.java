@@ -16,7 +16,7 @@ public class MainController {
         logger.debug("url= {\"/\",\"/home\",\"/index\"}, method=getHomePage()");
         return "home";
     }
-    @GetMapping("/test")
+    @GetMapping("/test1")
     public String getTestPage(){
         logger.debug("url= /test, method=getTestPage()");
         return "test1";

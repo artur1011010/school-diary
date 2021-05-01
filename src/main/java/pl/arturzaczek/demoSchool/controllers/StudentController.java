@@ -42,10 +42,4 @@ public class StudentController {
         model.addAttribute("student_id", id);
         return "studentProfile";
     }
-
-    @GetMapping("/test1")
-    public String getTest1() {
-        return "test1";
-    }
-
 }
