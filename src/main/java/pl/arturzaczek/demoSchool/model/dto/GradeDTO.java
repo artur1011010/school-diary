@@ -5,7 +5,6 @@ public class GradeDTO {
     private String subjectName;
     private Integer gradeValue;
 
-
     public GradeDTO() {
     }
 

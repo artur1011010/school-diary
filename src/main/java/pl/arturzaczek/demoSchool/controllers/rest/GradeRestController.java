@@ -46,7 +46,6 @@ public class GradeRestController {
         if (!byId.isPresent()) {
             return resultUser;
         }
-        //TODO collection eager fetch
         resultUser = byId.get();
         resultUser.addToGradeList(new Grade(50));
         userRepository.save(resultUser);

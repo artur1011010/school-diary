@@ -5,7 +5,6 @@
 <head>
     <title>school diary</title>
     <th:block th:insert="fragments/imports :: head"></th:block>
-    <th:block th:insert="fragments/imports :: user-liks"></th:block>
 </head>
 
 <body>
@@ -15,12 +14,6 @@
     <h2>test page:</h2>
     <button type="button" onclick="addGradeRest()" class="btn btn-primary">addGradeRest</button>
     <button type="button" onclick="addSecondGradeRest()" class="btn btn-primary">addSecondGradeRest</button>
-    <button type="button" onclick="addGradeToStudentById()" class="btn btn-primary">addGradeToStudentById</button>
-
-    <div class="input-group mb-3 id_student">
-        <input id="id_student" type="number" class="form-control" placeholder="id studenta">
-    </div>
-
 
     <p>test en</p>
     <h1 th:text="#{headline}"></h1>

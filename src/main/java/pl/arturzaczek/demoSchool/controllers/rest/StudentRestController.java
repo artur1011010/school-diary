@@ -51,11 +51,10 @@ public class StudentRestController {
         Optional<User> byId = userRepository.findById(long_id);
         if(byId.isEmpty()){
             logger.warn("deleteStudentById() rest " + student_id);
+//            todo - return student error
             return null;
         }
-        User user = byId.get();
-        System.out.println(user.getGradeList());
-        return user;
+        return byId.get();
     }
 
     @DeleteMapping("/student/{student_id}")

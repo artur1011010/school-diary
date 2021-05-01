@@ -123,29 +123,32 @@
                     </div>
                 </div>
             </div>
-
-
-            <hr class="my-4">
-            <p class="lead ">Grades:</p>
-            <div id="grade-list"></div>
-            <div class="accordion" style="margin-bottom: 20px;">
-                <h6 class="row alert-primary" style="padding: 10px;">Student grades</h6>
-                <table class="table-primary table-hover table-sm col-12">
-                    <tr class='row'>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting</td>
-                    </tr>
-                    <tr>
-                        <td>It is a long established fact that a reader will be distracted by the</td>
-                        <td>default model text, and a search for 'lorem ipsum' will uncover</td>
-                    </tr>
-                </table>
+            <hr class="my-3">
+            <div class="accordion" id="grades-accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Grades:
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                         data-bs-parent="#grades-accordion">
+                        <div class="accordion-body">
+                            <div id="grade-list-empty" class="alert alert-warning" role="alert">this student has no grades...</div>
+                            <div id="grade-list"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <th:block th:insert="fragments/imports :: js_import"></th:block>
-<script>getStudentDetails()</script>
+<script>
+    getStudentDetails();
+    populateProfile();
+</script>
 </body>
 </html>
