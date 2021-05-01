@@ -61,8 +61,8 @@ function addStudent() {
         data: stringStudent,
         method: "POST",
         success: function (result) {
-            console.log(result);
-        }
+            console.log(result.status);
+        },
     })
     clearForm();
     triggerSuccessAlert();

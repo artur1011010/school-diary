@@ -1,5 +1,4 @@
 function getStudentsList() {
-    // console.log("getStudentsList()")
     $.ajax({
         url: "/rest/students",
         contentType: "application/json",
@@ -12,16 +11,17 @@ function getStudentsList() {
 }
 
 function add20Students() {
-    // console.log("add20Students(): ");
-    setTimeout(function () {
-        getStudentsList();
-    }, 300);
     $.ajax({
         url: "/rest/add20Students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
-            // console.log(result);
+            console.log(result.status);
+        },
+        complete: function(xhr, textStatus) {
+            if(xhr.status ===202){
+                getStudentsList();
+            }
         }
     })
 }
@@ -81,13 +81,7 @@ function detailFormatter(index, row) {
         goToProfileButton +  modal + "</div>";
 }
 
-
-/**
- * TODO
- * usunać time out, przerobic to tak zeby po odpowiedzi serwera odswiezalo tabele
- */
 function deleteStudentById(student_id) {
-    // console.log("deleteButton(element):  " + student_id);
     let url = "/rest/student/" + student_id;
     setTimeout(function () {
         getStudentsList();

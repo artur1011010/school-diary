@@ -1,33 +1,6 @@
-function addGradeRest() {
-    console.log("addGradeRest(): ");
-    $.ajax({
-        url: "/rest/addGradeRest",
-        contentType: "application/json",
-        dataType: "json",
-        method: "POST",
-        success: function (result) {
-            console.log(result);
-        }
-    })
-}
-
-function addSecondGradeRest() {
-    console.log("addSecondGradeRest(): ");
-    $.ajax({
-        url: "/rest/addSecondGradeRest",
-        contentType: "application/json",
-        dataType: "json",
-        method: "POST",
-        success: function (result) {
-            console.log(result);
-        }
-    })
-}
-
 function addGradeToStudentById() {
     let element = $("#id_student").val();
-    // /addGrade/{student}"
-    console.log("addGradeToStudentById(): " + element);
+    // console.log("addGradeToStudentById(): " + element);
     let url = "/rest/addGrade/" + element;
     $.ajax({
         url: url,
@@ -35,7 +8,12 @@ function addGradeToStudentById() {
         dataType: "json",
         method: "POST",
         success: function (result) {
-            console.log(result);
+            console.log(result.status);
+        },
+        complete: function(xhr, textStatus) {
+            if(xhr.status ===202){
+                getStudentDetails();
+            }
         }
     })
 }
@@ -49,8 +27,6 @@ function addGrade() {
         email: $email.val(),
         birthDate: $birthDate.val()
     };
-
-    console.log("addGrade(): " + element);
     let url = "/rest/grade/" + element;
     $.ajax({
         url: url,
@@ -59,7 +35,11 @@ function addGrade() {
         data: grade,
         method: "POST",
         success: function (result) {
-            console.log(result);
+            console.log(result.status);
+        },
+        complete: function(xhr, textStatus) {
+            if(xhr.status ===202){
+            }
         }
     })
 }

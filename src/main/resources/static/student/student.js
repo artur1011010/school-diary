@@ -38,7 +38,6 @@ function populateGrades(grades) {
         $gradeListEmpty.css("display", "block");
     } else {
         $gradeListEmpty.css("display", "none");
-        $gradeList.html('');
         $gradeList.html(parseGradeToTable(grades));
     }
 }
@@ -73,9 +72,9 @@ function parseGrade(grade) {
         result = '<span class="badge badge-danger badge-grade">' + grade.gradeValue + '</span>';
     } else if (grade.gradeValue >= 30 && grade.gradeValue < 50) {
         result = '<span class="badge badge-warning badge-grade">' + grade.gradeValue + '</span>';
-    } else if (grade.gradeValue >= 50 && grade.gradeValue < 70) {
+    } else if (grade.gradeValue >= 50 && grade.gradeValue <= 80) {
         result = '<span class="badge badge-secondary badge-grade">' + grade.gradeValue + '</span>';
-    } else if (grade.gradeValue >= 70) {
+    } else if (grade.gradeValue >= 90) {
         result = '<span class="badge badge-success badge-grade">' + grade.gradeValue + '</span>';
     }
     return result;
@@ -101,10 +100,16 @@ function addGradeProfile() {
         data: stringGrade,
         method: "POST",
         success: function (result) {
-            console.log(result);
+            console.log(result.status);
+        },
+        complete: function(xhr, textStatus) {
+            if(xhr.status ===202){
+                getStudentDetails();
+            }
         }
     })
-    setTimeout(function () {
-        getStudentDetails();
-    }, 200);
+    // TODO- deprecated
+    // setTimeout(function () {
+    //     getStudentDetails();
+    // }, 200);
 }
