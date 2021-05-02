@@ -3,6 +3,8 @@ package pl.arturzaczek.demoSchool.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.arturzaczek.demoSchool.model.dto.GradeDTO;
 import pl.arturzaczek.demoSchool.model.entities.Grade;
@@ -26,13 +28,16 @@ public class GradeService {
         this.userRepository = userRepository;
     }
 
-    public void addGradeToStudentById(Long id_student, GradeDTO gradeDTO) {
+    public ResponseEntity addGradeToStudentById(Long id_student, GradeDTO gradeDTO) {
         Optional<User> byId = userRepository.findById(id_student);
         User user = byId.orElseGet(() -> new User("Error", "student not found"));
+        System.out.println("Student: \n" + user.getId().toString());
+        System.out.println("Grade: \n" + gradeDTO.toString());
         Grade grade = mapDTOtoGradeEntity(gradeDTO);
         grade.setStudent(user.getId());
         user.addToGradeList(grade);
         userRepository.save(user);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     private Grade mapDTOtoGradeEntity(GradeDTO gradeDTO){
