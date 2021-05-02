@@ -25,5 +25,8 @@ user/student list:
 add grades in student profile:
 ![image](https://user-images.githubusercontent.com/43014461/116010267-37c7c200-a61e-11eb-8e05-0fe31a7b6787.png)
 
+grades in student profile:
+![image](https://user-images.githubusercontent.com/43014461/116812752-b78aea80-ab50-11eb-9723-16e0ed18892d.png)
+
 user/student profile:
 ![image](https://user-images.githubusercontent.com/43014461/116010256-22eb2e80-a61e-11eb-9a1a-20a065b002d6.png)

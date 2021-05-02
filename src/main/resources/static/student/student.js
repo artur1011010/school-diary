@@ -103,13 +103,9 @@ function addGradeProfile() {
             console.log(result.status);
         },
         complete: function(xhr, textStatus) {
-            if(xhr.status ===202){
+            if(xhr.status ===200){
                 getStudentDetails();
             }
         }
     })
-    // TODO- deprecated
-    // setTimeout(function () {
-    //     getStudentDetails();
-    // }, 200);
 }
