@@ -3,23 +3,40 @@ package pl.arturzaczek.demoSchool.model.entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "USER")
 public class User extends BaseEntity {
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roleSet;
+    @Column(name = "first_name", length = 150)
     private String firstName;
+    @Column(name = "last_name", length = 100)
     private String lastName;
+    @Column(unique = true)
     private String email;
     @Basic
     private LocalDate birthDate;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, orphanRemoval = true)
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//    @OneToMany(mappedBy = "student")
     private List<Grade> gradeList;
+    @Column(name = "password_hash", length = 100)
+    private String passwordHash;
+
+    public void setRoleSet(Set<Role> roleSet) {
+        this.roleSet = roleSet;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 
     public User() {
     }
@@ -43,6 +60,16 @@ public class User extends BaseEntity {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.email = email;
+    }
+    public Set<Role> getRoleSet() {
+        return roleSet;
+    }
+
+    public void addRole(Role role) {
+        if (roleSet == null) {
+            roleSet = new HashSet<>();
+        }
+        roleSet.add(role);
     }
 
     public List<Grade> getGradeList() {
