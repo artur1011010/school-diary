@@ -24,13 +24,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
+    //todo
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .anyRequest().permitAll()
+//                .and()
+//                .csrf().disable()
+//                .headers().frameOptions().disable();
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
-                .headers().frameOptions().disable();
+                .headers().frameOptions().disable()
+                .and()
+                .formLogin()
+                .loginPage("/user/login-forms")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .failureUrl("/user/login-forms?status=errors")
+                .loginProcessingUrl("/user/loggedIn")
+                .defaultSuccessUrl("/user/profile")
+                .and()
+                .logout()
+                .logoutUrl("/user/logout")
+                .logoutSuccessUrl("/index")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+        ;
     }
 
     @Override

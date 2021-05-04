@@ -33,6 +33,19 @@
                 <li class="nav-item ml-3">
                     <a class="nav-link ml-3" th:href="@{/test1}">test page</a>
                 </li>
+                </li>
+                <li class="nav-item ml-3" th:if="${@userContextService.logged}">
+                    <a class="nav-link" th:href="@{/user/profile}">User profile</a>
+                </li>
+                <li class="nav-item ml-3" th:unless="${@userContextService.logged}">
+                    <a class="nav-link" th:href="@{/user/login}">Log in</a>
+                </li>
+                <li class="nav-item ml-3" th:unless="${@userContextService.logged}">
+                    <a class="nav-link" th:href="@{/user/register}">Register</a>
+                </li>
+                <li class="nav-item ml-3" th:if="${@userContextService.logged}">
+                    <a class="nav-link" th:href="@{/user/logout}">Log out</a>
+                </li>
             </ul>
         </div>
     </nav>

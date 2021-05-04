@@ -17,7 +17,7 @@ function addGradeToStudentById() {
         }
     })
 }
-
+// TODO - deprecated
 function addGrade() {
     let student_id = $("#id_student").val();
     let gradeValue = $("#id_student").val();
@@ -27,6 +27,11 @@ function addGrade() {
         email: $email.val(),
         birthDate: $birthDate.val()
     };
+    console.log("++++++++++++++++++++ ADD GRADE ++++++++++++++++++++")
+    console.log(grade.firstName)
+    console.log(grade.lastName)
+    console.log(grade.birthDate)
+    console.log(grade.email)
     let url = "/rest/grade/" + element;
     $.ajax({
         url: url,
