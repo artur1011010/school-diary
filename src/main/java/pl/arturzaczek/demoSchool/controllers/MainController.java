@@ -21,9 +21,10 @@ public class MainController {
         logger.debug("url= /test, method=getTestPage()");
         return "test1";
     }
-    @GetMapping("/test2")
-    public String getTest2Page(){
-        logger.debug("url= /test2, method=getTest2Page()");
-        return "test2";
-    }
+    //Todo deprecated
+//    @GetMapping("/test2")
+//    public String getTest2Page(){
+//        logger.debug("url= /test2, method=getTest2Page()");
+//        return "test2";
+//    }
 }

@@ -30,7 +30,6 @@ public class UserContextService {
     }
     public boolean isLogged() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         if (authentication instanceof AnonymousAuthenticationToken) {
             return false;
         }

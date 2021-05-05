@@ -1,6 +1,7 @@
 package pl.arturzaczek.demoSchool.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -36,11 +37,11 @@ public class UserController {
         model.addAttribute("userRegisterForm", new UserRegisterForm());
         return "user/register-form";
     }
-
+//todo change String to ResponseEntity
     @PostMapping("/user/register/new")
     public String registerUser(@ModelAttribute UserRegisterForm userRegisterForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("userDTO", userRegisterForm);
+            model.addAttribute("userRegisterForm", userRegisterForm);
             return "user/register-form";
         }
         if(userService.checkIfUserExist(userRegisterForm.getEmail())){
@@ -54,15 +55,25 @@ public class UserController {
         return "redirect:/index";
     }
     @GetMapping("/user/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/user/login-forms";
     }
-    @GetMapping("/user/profile")
-    public String goToUserProfile (){
-        return "user/profile";
+
+    @GetMapping("/user/loggedIn")
+    public String loggedIn (){
+        return "user/loggedIn";
     }
+
+    @PostMapping("/user/loggedIn")
+    public String loggedIn2 (){
+        return "user/loggedIn";
+    }
+//    @GetMapping("/user/profile")
+//    public String goToUserProfile (){
+//        return "user/profile";
+//    }
 }
