@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class GradeController {
 
     Logger logger = LoggerFactory.getLogger(GradeController.class);
+//todo - deprecated
 
-    @GetMapping("/addGradeView")
-    public String addGrade(){
-        logger.debug("url= /addGradeView, method=addGrade()");
-        return "home";
-    }
+//    @GetMapping("/addGradeView")
+//    public String addGrade(){
+//        logger.debug("url= /addGradeView, method=addGrade()");
+//        return "home";
+//    }
 }
