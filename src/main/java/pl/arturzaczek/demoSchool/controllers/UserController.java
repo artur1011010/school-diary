@@ -61,11 +61,12 @@ public class UserController {
         }
         return "/user/login-form";
     }
+//  todo deprecated
 
-    @GetMapping("/user/loggedIn")
-    public String loggedIn (){
-        return "user/loggedIn";
-    }
+//    @GetMapping("/user/loggedIn")
+//    public String loggedIn (){
+//        return "user/loggedIn";
+//    }
 
     @GetMapping("/user/login-form")
     public String userLogin () {

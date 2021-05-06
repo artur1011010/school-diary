@@ -24,34 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
-    //todo
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .anyRequest().permitAll()
-//                .and()
-//                .csrf().disable()
-//                .headers().frameOptions().disable();
-//    }
-//    2.0
-//     http.authorizeRequests()
-//             .antMatchers("/post/add").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/post/*/comment/add").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/post/comment/add").hasAnyRole("USER", "ADMIN")
-//                .anyRequest().permitAll()
-//            .and()
-//    //h2 database requires for proper operation
-//                .csrf().disable()
-//                .headers().frameOptions().disable()
-//            .and()
-//                .formLogin()
-//                .loginPage("/user/login")
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .failureUrl("/user/login?status=error")
-//                .loginProcessingUrl("/login-post-by-spring")
-//                .defaultSuccessUrl("/");
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -66,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  */
                 .antMatchers("/test1").hasAnyRole("USER", "ADMIN","PRINCIPAL", "PRINCIPAL","PARENT", "STUDENT")
                 .antMatchers("/studentProfile").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/studentsList").hasRole("USER")
+                .antMatchers("/studentsList").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable().headers().frameOptions().disable()

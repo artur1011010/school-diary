@@ -17,29 +17,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-
                 <li class="nav-item ml-3">
                     <a class="nav-link ml-3 " th:href="@{/}">School Diary - home</a>
                 </li>
-                <li class="nav-item ml-3">
+                <li class="nav-item ml-3" th:if="${@userContextService.logged}">
                     <a class="nav-link ml-3" th:href="@{/addStudent}">Add user form</a>
                 </li>
-                <li class="nav-item ml-3">
-                    <a class="ml-3 nav-link" th:href="@{/studentsList}">Students list</a>
+                <li class="nav-item ml-3" id="students-list-icon">
+                    <!--                    <i class="fas fa-address-book"></i>-->
+                    <a class="ml-3 nav-link" th:href="@{/studentsList}"><img
+                            th:src="@{~/images/icon/address-book-regular.svg}" alt="address book">Students list</a>
                 </li>
-<!--                TODO - deprecated -->
-<!--                <li class="nav-item ml-3">-->
-<!--                    <a class="nav-link ml-3" th:href="@{/studentProfile}">user profile</a>-->
-<!--                </li>-->
-                <li class="nav-item ml-3">
-                    <a class="nav-link ml-3" th:href="@{/test1}">test page</a>
-                </li>
-                </li>
-                <li class="nav-item ml-3" th:if="${@userContextService.logged}">
-                    <a class="nav-link" th:href="@{/user/profile}">User profile</a>
-                </li>
-                <li class="nav-item ml-3" th:unless="${@userContextService.logged}">
-                    <a class="nav-link" th:href="@{/user/login}">Log in</a>
+            </ul>
+            <ul class="navbar-nav user-field">
+                <li class="nav-item ml-3 user-logged-icon" th:unless="${@userContextService.logged}">
+                    <a class="nav-link" th:href="@{/user/login}">
+                        <img th:src="@{~/images/icon/user-solid.svg}" alt="user icon">Log in</a>
                 </li>
                 <li class="nav-item ml-3" th:unless="${@userContextService.logged}">
                     <a class="nav-link" th:href="@{/user/register}">Register</a>
@@ -47,11 +40,21 @@
                 <li class="nav-item ml-3" th:if="${@userContextService.logged}">
                     <a class="nav-link" th:href="@{/user/logout}">Log out</a>
                 </li>
-                <div class="nav-item active ml-md-3 ml-sm-2" id="user-name-label"><a th:href="@{/studentProfile/1}"
-                                                                                     th:if="${@userContextService.isLogged}"
-                                                                                     th:text="${@userContextService.loggedAs}"></a>
+                <div id="user-logged-icon" class="nav-item ml-3 mt-2">
+                    <a th:href="@{/studentProfile/}"
+                       th:if="${@userContextService.isLogged}"
+                       th:text="${@userContextService.loggedAs}">
+                        <!--                        <img th:src="@{~/images/icon/user-solid.svg}" alt="user icon">-->
+                    </a>
                 </div>
             </ul>
+
+            <!--                todo - shows id-->
+            <!--                <div class="nav-item ml-3 mt-2">-->
+            <!--                    <a th:href="@{/studentProfile/}"-->
+            <!--                       th:if="${@userContextService.isLogged}"-->
+            <!--                       th:text="${@userContextService.getLoggedId}"></a>-->
+            <!--                </div>-->
         </div>
     </nav>
 </th:block>
