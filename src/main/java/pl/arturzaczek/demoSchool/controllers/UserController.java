@@ -1,7 +1,6 @@
 package pl.arturzaczek.demoSchool.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.arturzaczek.demoSchool.model.dto.UserDTO;
 import pl.arturzaczek.demoSchool.model.dto.UserRegisterForm;
 import pl.arturzaczek.demoSchool.service.UserService;
 
@@ -37,7 +35,7 @@ public class UserController {
         model.addAttribute("userRegisterForm", new UserRegisterForm());
         return "user/register-form";
     }
-//todo change String to ResponseEntity
+
     @PostMapping("/user/register/new")
     public String registerUser(@ModelAttribute UserRegisterForm userRegisterForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -54,13 +52,14 @@ public class UserController {
         System.out.println("user registered successfully");
         return "redirect:/index";
     }
+
     @GetMapping("/user/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/user/login-forms";
+        return "/user/login-form";
     }
 
     @GetMapping("/user/loggedIn")
@@ -68,12 +67,12 @@ public class UserController {
         return "user/loggedIn";
     }
 
-    @PostMapping("/user/loggedIn")
-    public String loggedIn2 (){
-        return "user/loggedIn";
+    @GetMapping("/user/login-form")
+    public String userLogin () {
+        return "user/login-form";
     }
-//    @GetMapping("/user/profile")
-//    public String goToUserProfile (){
-//        return "user/profile";
-//    }
+    @GetMapping("user/loginError")
+    public String userLoginError () {
+        return "user/loginError";
+    }
 }
