@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>School diary - doc.</title>
+    <th:block th:insert="fragments/imports :: head"></th:block>
+    <th:block th:insert="fragments/imports :: grade-liks"></th:block>
+</head>
+<body>
+<th:block th:insert="fragments/components :: nav"></th:block>
+<div class="main-wrapper">
+    <a id="button-top"></a>
+    <!--    todo section-->
+    <div class="col-8 mt-3 custom-jumbotron" role="alert">
+        <div class="h-100 p-5 alert-warning border rounded-3">
+            <h2 class="mb-2">TODO's</h2>
+            <ul>
+                <li>fix delete student role id problem</li>
+                <li>email service, confirm registration</li>
+                <li>student group</li>
+                <li>student profile- edit student details</li>
+                <li>language change-internationalization <a
+                        href="https://phrase.com/blog/posts/how-to-localize-spring-applications-like-a-pro/">article</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-8 mt-3 custom-jumbotron">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2 class="mb-2">Adding users</h2>
+            <p>Initially when server stated user database is empty, you can add users:</p>
+            <ul>
+                <li>
+                    via simple user registration form <a class="nav-link" th:href="@{/user/register}">register</a>
+                </li>
+                <li>
+                    You can add 20 students when you are logged in <a class="ml-3 nav-link"
+                                                                      th:href="@{/studentsList}">students
+                    list</a>
+                </li>
+                <li>
+                    Create admin user
+                    <p>@mail: admin</p>
+                    <p>password: admin</p>
+                    <button class="btn btn-outline-secondary" onclick="postAdmin()" type="button">Create admin
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<th:block th:insert="fragments/imports :: js_import"></th:block>
+
+</html>

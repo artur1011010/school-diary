@@ -89,11 +89,17 @@ public class UserService {
         }
         return false;
     }
-    private void getORCreateDefaultRole(User user) {
+    protected void getORCreateDefaultRole(User user) {
         Role role = roleRepository.findByRoleName(RoleEnum.ROLE_USER.toString())
                 .orElseGet(() -> roleRepository.save(new Role(RoleEnum.ROLE_USER.toString())));
         user.addRole(role);
     }
+    protected void getORCreateDefaultRole(User user, RoleEnum roleEnum) {
+        Role role = roleRepository.findByRoleName(roleEnum.toString())
+                .orElseGet(() -> roleRepository.save(new Role(roleEnum.toString())));
+        user.addRole(role);
+    }
+
     public List<User> getUserList(){
         List<User> users = userRepository.findAll();
         return users;

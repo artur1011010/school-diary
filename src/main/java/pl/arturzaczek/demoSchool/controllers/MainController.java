@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @Controller
 public class MainController {
 
@@ -16,9 +15,16 @@ public class MainController {
         logger.debug("url= {\"/\",\"/home\",\"/index\"}, method=getHomePage()");
         return "home";
     }
+
     @GetMapping("/test1")
     public String getTestPage(){
-        logger.debug("url= /test, method=getTestPage()");
+        logger.debug("url= /test1, method=getTestPage()");
         return "test1";
+    }
+
+    @GetMapping("/doc")
+    public String getDocumentation(){
+        logger.debug("url= /doc, method=getDocumentation()");
+        return "doc/mian-doc";
     }
 }

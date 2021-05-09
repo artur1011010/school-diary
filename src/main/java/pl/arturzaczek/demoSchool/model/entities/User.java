@@ -54,6 +54,13 @@ public class User extends BaseEntity {
         this.birthDate = birthDate;
     }
 
+    public User(String firstName, String lastName, String email) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public User(String firstName, String lastName, LocalDate birthDate, String email) {
         super();
         this.firstName = firstName;
@@ -61,6 +68,7 @@ public class User extends BaseEntity {
         this.birthDate = birthDate;
         this.email = email;
     }
+
     public Set<Role> getRoleSet() {
         return roleSet;
     }

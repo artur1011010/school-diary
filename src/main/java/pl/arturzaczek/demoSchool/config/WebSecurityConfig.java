@@ -67,13 +67,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("SELECT u.email, r.role_name FROM USER u JOIN user_role ur ON u.id = ur.user_id JOIN ROLE r ON ur.ROLE_ID = r.id WHERE u.email = ?")
                 .passwordEncoder(passwordEncoder);
     }
-
-//    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user1").password(passwordEncoder().encode("user1")).roles("USER")
-//                .and()
-//                .withUser("user2").password(passwordEncoder().encode("user2")).roles("USER")
-//                .and()
-//                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
-//    }
 }

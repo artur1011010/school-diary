@@ -19,12 +19,14 @@ public class StudentService {
     Logger logger = LoggerFactory.getLogger(StudentService.class);
     GradeRepository gradeRepository;
     UserRepository userRepository;
+    RoleService roleService;
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    public StudentService(GradeRepository gradeRepository, UserRepository userRepository,PasswordEncoder passwordEncoder) {
+    public StudentService(GradeRepository gradeRepository, UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.gradeRepository = gradeRepository;
         this.userRepository = userRepository;
+        this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -41,7 +43,20 @@ public class StudentService {
     List<String> emails = new ArrayList<>(
             List.of("@tlen.pl", "@gmail.com", "@onet.pl", "@outlook.com", "@AOL.com", "@gmail.com"));
 
+    public void initializeAdminTestUser(){
+        logger.debug("initializeAdminTestUsers()");
+        Optional<User> admin1 = userRepository.findFirstByEmail("admin");
+        if(admin1.isPresent()) return;
+        User admin = new User("Admin", "Admin", "admin@gmail.com");
+        admin.setPasswordHash(passwordEncoder.encode("admin"));
+        roleService.getORCreateDefaultRole(admin, RoleEnum.ROLE_USER);
+        roleService.getORCreateDefaultRole(admin, RoleEnum.ROLE_ADMIN);
+        userRepository.save(admin);
+    }
+
+// TODO - save user in method instead of returning to userService
     public List<User> createRandomUserM() {
+        logger.debug("createRandomUserM()");
         Collections.shuffle(studentNamesM);
         Collections.shuffle(studentLastNamesM);
         Collections.shuffle(emails);
@@ -51,16 +66,18 @@ public class StudentService {
             User user = new User();
             user.setFirstName(studentNamesM.get(i));
             user.setLastName(studentLastNamesM.get(i));
-            user.setEmail(studentNamesM.get(i) + "." + studentLastNamesM.get(i) + random.nextInt(1000) + emails.get(i / 2));
+            String simplifiedEmail = simplifyLatinChars(studentNamesM.get(i) + "." + studentLastNamesM.get(i)) + random.nextInt(1000) + emails.get(i / 2);
+            user.setEmail(simplifiedEmail);
             user.setBirthDate(between());
-            user.setPasswordHash(passwordEncoder.encode(user.getEmail()));
+            user.setPasswordHash(passwordEncoder.encode(simplifiedEmail));
+            roleService.getORCreateDefaultRole(user, RoleEnum.ROLE_STUDENT);
             users.add(user);
         }
         return users;
     }
 
-
     public List<User> createRandomUserF() {
+        logger.debug("createRandomUserF()");
         Collections.shuffle(studentNamesF);
         Collections.shuffle(studentLastNamesF);
         Collections.shuffle(emails);
@@ -70,9 +87,11 @@ public class StudentService {
             User user = new User();
             user.setFirstName(studentNamesF.get(i));
             user.setLastName(studentLastNamesF.get(i));
-            user.setEmail(studentNamesF.get(i) + "." + studentLastNamesF.get(i) + random.nextInt(1000) + emails.get(i / 2));
+            String simplifiedEmail = simplifyLatinChars(studentNamesF.get(i) + "." + studentLastNamesF.get(i)) + random.nextInt(1000) + emails.get(i / 2);
+            user.setEmail(simplifiedEmail);
             user.setBirthDate(between());
-            user.setPasswordHash(passwordEncoder.encode(user.getEmail()));
+            user.setPasswordHash(passwordEncoder.encode(simplifiedEmail));
+            roleService.getORCreateDefaultRole(user, RoleEnum.ROLE_STUDENT);
             users.add(user);
         }
         return users;
@@ -87,5 +106,73 @@ public class StudentService {
                 .current()
                 .nextLong(startEpochDay, endEpochDay);
         return LocalDate.ofEpochDay(randomDay);
+    }
+
+    private String simplifyLatinChars(String inputString) {
+        char[] input = inputString.toCharArray();
+        StringBuilder output = new StringBuilder();
+        int inputLength = input.length;
+        for (int i = 0; i < inputLength; i++) {
+            switch (input[i]) {
+                case 'ą':
+                    output.append('a');
+                    break;
+                case 'ć':
+                    output.append('c');
+                    break;
+                case 'ę':
+                    output.append('e');
+                    break;
+                case 'ł':
+                    output.append('l');
+                    break;
+                case 'ń':
+                    output.append('n');
+                    break;
+                case 'ó':
+                    output.append('o');
+                    break;
+                case 'ś':
+                    output.append('s');
+                    break;
+                case 'ź':
+                    output.append('z');
+                    break;
+                case 'ż':
+                    output.append('z');
+                    break;
+                case 'Ą':
+                    output.append('A');
+                    break;
+                case 'Ć':
+                    output.append('C');
+                    break;
+                case 'Ę':
+                    output.append('E');
+                    break;
+                case 'Ł':
+                    output.append('L');
+                    break;
+                case 'Ń':
+                    output.append('N');
+                    break;
+                case 'Ó':
+                    output.append('O');
+                    break;
+                case 'Ś':
+                    output.append('S');
+                    break;
+                case 'Ź':
+                    output.append('Z');
+                    break;
+                case 'Ż':
+                    output.append('Z');
+                    break;
+                default:
+                    output.append(input[i]);
+                    break;
+            }
+        }
+        return output.toString();
     }
 }
