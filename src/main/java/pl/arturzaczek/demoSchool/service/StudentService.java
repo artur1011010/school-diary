@@ -70,7 +70,7 @@ public class StudentService {
             user.setEmail(simplifiedEmail);
             user.setBirthDate(between());
             user.setPasswordHash(passwordEncoder.encode(simplifiedEmail));
-            roleService.getORCreateDefaultRole(user, RoleEnum.ROLE_STUDENT);
+            roleService.getORCreateDefaultRole(user, RoleEnum.ROLE_USER);
             users.add(user);
         }
         return users;
@@ -91,7 +91,7 @@ public class StudentService {
             user.setEmail(simplifiedEmail);
             user.setBirthDate(between());
             user.setPasswordHash(passwordEncoder.encode(simplifiedEmail));
-            roleService.getORCreateDefaultRole(user, RoleEnum.ROLE_STUDENT);
+            roleService.getORCreateDefaultRole(user, RoleEnum.ROLE_USER);
             users.add(user);
         }
         return users;
