@@ -15,7 +15,8 @@
     line-height: 1em;
 }
 
-#studentListResultWrapper .student-table-details button.custom-button{
-    /*color: red;*/
-    /*border-radius: 5px;*/
+#form-search{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }

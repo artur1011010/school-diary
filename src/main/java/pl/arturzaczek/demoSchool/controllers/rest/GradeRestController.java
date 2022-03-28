@@ -1,31 +1,24 @@
 package pl.arturzaczek.demoSchool.controllers.rest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pl.arturzaczek.demoSchool.model.dto.GradeDTO;
 import pl.arturzaczek.demoSchool.service.GradeService;
 
 @RestController
 @RequestMapping("/rest")
+@Slf4j
+@RequiredArgsConstructor
 public class GradeRestController {
 
-    Logger logger = LoggerFactory.getLogger(GradeRestController.class);
-    GradeService gradeService;
-
-    @Autowired
-    public GradeRestController(GradeService gradeService) {
-        this.gradeService = gradeService;
-    }
+    private final GradeService gradeService;
 
     @PostMapping("/grade/{student}")
-    public ResponseEntity addGradeToStudentById(@PathVariable String student, @RequestBody GradeDTO gradeDTO) {
-        logger.debug("url= /rest/grade/{student}, method=addGradeToStudentById(), STUDENT: " + student + " , GRADE: " + gradeDTO);
+    public void addGradeToStudentById(@PathVariable final String student, @RequestBody final GradeDTO gradeDTO) {
+        log.debug("url= /rest/grade/{student}, method=addGradeToStudentById(), STUDENT: " + student + " , GRADE: " + gradeDTO);
         Long id = Long.parseLong(student);
-        return gradeService.addGradeToStudentById(id, gradeDTO);
+        gradeService.addGradeToStudentById(id, gradeDTO);
     }
 }
 

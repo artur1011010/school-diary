@@ -1,8 +1,17 @@
 package pl.arturzaczek.demoSchool.model.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,29 +23,5 @@ public class Role {
         this.roleName = roleName;
     }
     public Role() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", roleName='" + roleName + '\'' +
-                '}';
     }
 }

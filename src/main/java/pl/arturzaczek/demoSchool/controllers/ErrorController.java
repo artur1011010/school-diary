@@ -1,7 +1,6 @@
 package pl.arturzaczek.demoSchool.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +9,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@Slf4j
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController  {
-
-    Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
-        logger.error("url= /error, method=handleError() REQUEST: " + RequestDispatcher.ERROR_STATUS_CODE);
+        log.error("url= /error, method=handleError() REQUEST: " + RequestDispatcher.ERROR_STATUS_CODE);
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());

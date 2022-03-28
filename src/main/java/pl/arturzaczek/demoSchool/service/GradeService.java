@@ -1,47 +1,32 @@
 package pl.arturzaczek.demoSchool.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.arturzaczek.demoSchool.model.dto.GradeDTO;
 import pl.arturzaczek.demoSchool.model.entities.Grade;
 import pl.arturzaczek.demoSchool.model.entities.User;
-import pl.arturzaczek.demoSchool.model.repositories.GradeRepository;
 import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
+import pl.arturzaczek.demoSchool.utils.GradeMapper;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class GradeService {
 
-    Logger logger = LoggerFactory.getLogger(GradeService.class);
-    GradeRepository gradeRepository;
-    UserRepository userRepository;
-    private Grade resultGrade;
+    private final UserRepository userRepository;
+    private final GradeMapper gradeMapper;
 
-    @Autowired
-    public GradeService(GradeRepository gradeRepository, UserRepository userRepository) {
-        this.gradeRepository = gradeRepository;
-        this.userRepository = userRepository;
-    }
-
-    public ResponseEntity addGradeToStudentById(Long id_student, GradeDTO gradeDTO) {
-        Optional<User> byId = userRepository.findById(id_student);
-        User user = byId.orElseGet(() -> new User("Error", "student not found"));
-        System.out.println("Student: \n" + user.getId().toString());
-        System.out.println("Grade: \n" + gradeDTO.toString());
-        Grade grade = mapDTOtoGradeEntity(gradeDTO);
+    public void addGradeToStudentById(final Long studentId, final GradeDTO gradeDTO) {
+        log.info("addGradeToStudentById: \n{}", gradeDTO);
+        Optional<User> byId = userRepository.findById(studentId);
+        User user = byId.orElseGet(() -> User.builder().firstName("Error").build());
+        Grade grade = gradeMapper.mapDTOtoGradeEntity(gradeDTO);
         grade.setStudent(user.getId());
         user.addToGradeList(grade);
         userRepository.save(user);
-        return new ResponseEntity(HttpStatus.OK);
     }
 
-    private Grade mapDTOtoGradeEntity(GradeDTO gradeDTO){
-        resultGrade = new Grade(gradeDTO.getGradeValue(),gradeDTO.getSubjectName());
-        return resultGrade;
-    }
 }

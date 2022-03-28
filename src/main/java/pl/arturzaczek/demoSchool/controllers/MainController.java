@@ -1,30 +1,28 @@
 package pl.arturzaczek.demoSchool.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+@Slf4j
 public class MainController {
-
-    Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @GetMapping(value = {"/","/home","/index"})
     public String getHomePage(){
-        logger.debug("url= {\"/\",\"/home\",\"/index\"}, method=getHomePage()");
+        log.debug("url= {\"/\",\"/home\",\"/index\"}, method=getHomePage()");
         return "home";
-    }
-
-    @GetMapping("/test1")
-    public String getTestPage(){
-        logger.debug("url= /test1, method=getTestPage()");
-        return "test1";
     }
 
     @GetMapping("/doc")
     public String getDocumentation(){
-        logger.debug("url= /doc, method=getDocumentation()");
+        log.debug("url= /doc, method=getDocumentation()");
         return "doc/mian-doc";
+    }
+
+    @GetMapping("/changelog")
+    public String getChangelog(){
+        log.debug("url= /changelog, method=getChangelog()");
+        return "changelog";
     }
 }

@@ -1,44 +1,38 @@
 package pl.arturzaczek.demoSchool.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.arturzaczek.demoSchool.model.dto.StudentResponse;
 import pl.arturzaczek.demoSchool.model.dto.UserRegisterForm;
 import pl.arturzaczek.demoSchool.model.entities.Role;
 import pl.arturzaczek.demoSchool.model.entities.User;
-import pl.arturzaczek.demoSchool.model.repositories.GradeRepository;
 import pl.arturzaczek.demoSchool.model.repositories.RoleRepository;
 import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
+import pl.arturzaczek.demoSchool.utils.RandomUserHelper;
+import pl.arturzaczek.demoSchool.utils.StudentMapper;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class UserService {
 
-    Logger logger = LoggerFactory.getLogger(UserService.class);
-    GradeRepository gradeRepository;
-    UserRepository userRepository;
-    RoleRepository roleRepository;
-    StudentService studentService;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RandomUserHelper randomUserHelper;
+    private final StudentMapper studentMapper;
 
-    @Autowired
-    public UserService(GradeRepository gradeRepository, UserRepository userRepository, StudentService studentService, PasswordEncoder passwordEncoder,RoleRepository roleRepository) {
-        this.gradeRepository = gradeRepository;
-        this.userRepository = userRepository;
-        this.studentService = studentService;
-        this.passwordEncoder = passwordEncoder;
-        this.roleRepository = roleRepository;
-    }
-
-    public void registerUser (UserRegisterForm userRegisterForm){
-        User user = new User();
+    public void registerUser(final UserRegisterForm userRegisterForm) {
+        final User user = new User();
         user.setAddedDate(LocalDateTime.now());
         user.setFirstName(userRegisterForm.getFormName());
         user.setLastName(userRegisterForm.getFormLastName());
@@ -48,60 +42,64 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<User> getUsersList(){
-        return userRepository.findAll();
+    public List<StudentResponse> getUsersList() {
+        return userRepository
+                .findAll()
+                .stream()
+                .map(studentMapper::mapUserToStudentResponse)
+                .collect(Collectors.toList());
     }
 
-    public void saveUser(User user){
+    public void saveUser(final User user) {
         userRepository.save(user);
     }
 
-    public void save20users(){
-        List<User> randomUserM = studentService.createRandomUserM();
-        List<User> randomUserF = studentService.createRandomUserF();
+    public void save20users() {
+        final List<User> randomUserM = randomUserHelper.createRandomUserM();
+        final List<User> randomUserF = randomUserHelper.createRandomUserF();
         randomUserM.addAll(randomUserF);
         userRepository.saveAll(randomUserM);
     }
 
-    public ResponseEntity<User> getStudentById(Long student_id){
-        Optional<User> byId = userRepository.findById(student_id);
-        if(byId.isEmpty()){
-            logger.warn("student not found, id: " + student_id);
-            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<StudentResponse> getStudentById(final Long student_id) {
+        final Optional<User> byId = userRepository.findById(student_id);
+        if (byId.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity(byId.get(), HttpStatus.OK);
+        return ResponseEntity.ok(studentMapper.mapUserToStudentResponse(byId.get()));
     }
 
-    public ResponseEntity deleteById(Long long_id){
-        Optional<User> byId = userRepository.findById(long_id);
-        if(byId.isEmpty()){
-            logger.warn("deleteStudentById() rest " + long_id);
+    public ResponseEntity deleteById(final Long long_id) {
+        final Optional<User> byId = userRepository.findById(long_id);
+        if (byId.isEmpty()) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         userRepository.deleteById(long_id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    public boolean checkIfUserExist (String email){
-        Optional<User> userOptional = userRepository.findFirstByEmail(email);
-        if(userOptional.isPresent()){
+    public boolean checkIfUserExist(final String email) {
+        final Optional<User> userOptional = userRepository.findFirstByEmail(email);
+        if (userOptional.isPresent()) {
             return true;
         }
         return false;
     }
-    protected void getORCreateDefaultRole(User user) {
+
+    protected void getORCreateDefaultRole(final User user) {
         Role role = roleRepository.findByRoleName(RoleEnum.ROLE_USER.toString())
                 .orElseGet(() -> roleRepository.save(new Role(RoleEnum.ROLE_USER.toString())));
         user.addRole(role);
     }
-    protected void getORCreateDefaultRole(User user, RoleEnum roleEnum) {
-        Role role = roleRepository.findByRoleName(roleEnum.toString())
+
+    protected void getORCreateDefaultRole(final User user, final RoleEnum roleEnum) {
+        final Role role = roleRepository.findByRoleName(roleEnum.toString())
                 .orElseGet(() -> roleRepository.save(new Role(roleEnum.toString())));
         user.addRole(role);
     }
 
-    public List<User> getUserList(){
-        List<User> users = userRepository.findAll();
+    public List<User> getUserList() {
+        final List<User> users = userRepository.findAll();
         return users;
     }
 }

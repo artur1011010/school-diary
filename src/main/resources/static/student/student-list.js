@@ -1,13 +1,34 @@
+let studentsList = [];
+let tempList = [];
+
 function getStudentsList() {
     $.ajax({
         url: "/rest/students",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
-            // console.log(result);
-            populateStudentsList(result);
+            studentsList = result;
+            tempList = result;
+            populateStudentsList();
         }
     })
+}
+
+function search() {
+    tempList = studentsList.slice()
+    const searchWord = document.getElementById('form-search').value
+    tempList = studentsList.filter(element => {
+        if (element.firstName.toLowerCase().includes(searchWord.toLowerCase())) {
+            return true;
+        } else if (element.lastName.toLowerCase().includes(searchWord.toLowerCase())) {
+            return true;
+        } else if (element.email.toLowerCase().includes(searchWord.toLowerCase())) {
+            return true;
+        } else {
+            return false;
+        }
+    })
+    populateStudentsList();
 }
 
 function add20Students() {
@@ -18,18 +39,18 @@ function add20Students() {
         success: function (result) {
             console.log(result.status);
         },
-        complete: function(xhr, textStatus) {
-            if(xhr.status ===202){
+        complete: function (xhr, textStatus) {
+            if (xhr.status === 202) {
                 getStudentsList();
             }
         }
     })
 }
 
-function populateStudentsList(input) {
-    if (input.length > 0) {
+function populateStudentsList() {
+    if (tempList.length > 0) {
         let jsonArr = [];
-        for (let element of input) {
+        for (let element of tempList) {
             jsonArr.push({
                 student_id: element.id,
                 firstName: element.firstName,
@@ -78,7 +99,7 @@ function detailFormatter(index, row) {
         '<button type="button" class="btn btn-primary" onClick="deleteStudentById(' + row.student_id + ')" data-dismiss="modal">Delete user</button></div></div></div></div>';
 
     return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + deleteButton + " " +
-        goToProfileButton +  modal + "</div>";
+        goToProfileButton + modal + "</div>";
 }
 
 function deleteStudentById(student_id) {

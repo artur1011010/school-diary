@@ -9,41 +9,23 @@
 <th:block th:insert="fragments/components :: nav"></th:block>
 <div class="main-wrapper">
     <a id="button-top"></a>
-    <!--    todo section-->
-    <div class="col-8 mt-3 custom-jumbotron" role="alert">
-        <div class="h-100 p-5 alert-warning border rounded-3">
-            <h2 class="mb-2">TODO's</h2>
-            <ul>
-                <li>email service, confirm registration</li>
-                <li>student group</li>
-                <li>student profile- edit student details</li>
-                <li>language change-internationalization <a
-                        href="https://phrase.com/blog/posts/how-to-localize-spring-applications-like-a-pro/">article</a>
-                </li>
-            </ul>
-        </div>
-    </div>
     <div class="col-8 mt-3 custom-jumbotron">
         <div class="h-100 p-5 bg-light border rounded-3">
-            <h2 class="mb-2">Adding users</h2>
-            <p>Initially when server stated user database is empty, you can add users:</p>
+            <h4 class="text-center">Dodawanie użytkowników i rejestracja:</h4>
+            <p>Aplikacja umożliwia rejestrowanie nowych użytkowików i następnie logowanie się ich pomocą, domyślnie aplikacja posiada kilku użytkowników:</p>
             <ul>
-                <li>
-                    via simple user registration form <a class="nav-link" th:href="@{/user/register}">register</a>
-                </li>
-                <li>
-                    You can add 20 students when you are logged in <a class="ml-3 nav-link"
-                                                                      th:href="@{/studentsList}">students
-                    list</a>
-                </li>
-                <li>
-                    Create admin user
-                    <p>@mail: admin@gmail.com</p>
-                    <p>password: admin</p>
-                    <button class="btn btn-outline-secondary" onclick="postAdmin()" type="button">Create admin
-                    </button>
-                </li>
+                <li>Admin: <br>mail: admin@gmail.com<br>password: admin</li>
+                <li>Nauczyciel: <br>mail: teacher@gmail.com<br>password: teacher</li>
             </ul>
+            <p>Istnieje możlość po zalogowaniu generowania losowych użytkownikow, można logować się na ich konta za pomoca wygenerowanego maila.</p>
+            <p>Dodatkowo można dodawać pojedyńczych użytkowników za pomocą formularza dostępnego po zalogowniu na konto admina w pasku nawigacji "Add student".</p>
+            <ul>
+                <li>mail: zostanie wygenerowany losowo i widoczny na liscie</li>
+                <li>password: mail staje się hasłem</li>
+            </ul>
+            <hr/>
+            <h4 class="text-center">Wystawianie ocen:</h4>
+            <p>Po zalogowaniu na użytkownika z rolą ADMIN, TEACHER lub PRINCIPAL dostajemy możliwość wystawiania ocen studentom, w tym celu trzeb awybrac po zalogowaniu "students list" wyszukać studenta i klikajac "+" rozwinąc szczegóły i wejść na profil studenta i tam można dodawać oceny</p>
         </div>
     </div>
 </div>

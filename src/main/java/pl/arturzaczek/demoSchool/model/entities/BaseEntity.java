@@ -31,4 +31,5 @@ public abstract class BaseEntity {
     public void setAddedDate(LocalDateTime addedDate) {
         this.addedDate = LocalDateTime.now();
     }
+
 }

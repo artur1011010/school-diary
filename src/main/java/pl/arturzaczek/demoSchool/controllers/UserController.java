@@ -1,6 +1,7 @@
 package pl.arturzaczek.demoSchool.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -17,13 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
 public class UserController {
-    private UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping("/user/login")
     public String getLoginForm() {
@@ -31,49 +30,45 @@ public class UserController {
     }
 
     @GetMapping("user/register")
-    public String getRegisterForm(Model model) {
+    public String getRegisterForm(final Model model) {
         model.addAttribute("userRegisterForm", new UserRegisterForm());
         return "user/register-form";
     }
 
     @PostMapping("/user/register/new")
-    public String registerUser(@ModelAttribute UserRegisterForm userRegisterForm, BindingResult bindingResult, Model model) {
+    public String registerUser(@ModelAttribute final UserRegisterForm userRegisterForm, final BindingResult bindingResult, final Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userRegisterForm", userRegisterForm);
             return "user/register-form";
         }
-        if(userService.checkIfUserExist(userRegisterForm.getEmail())){
+        if (userService.checkIfUserExist(userRegisterForm.getEmail())) {
             model.addAttribute("employeeRegisterForm", userRegisterForm);
-            model.addAttribute("user_error","user exist");
+            model.addAttribute("user_error", "user exist");
             return "user/register-form";
         }
         userService.registerUser(userRegisterForm);
-        model.addAttribute("registered_success","new user registered successfully");
+        model.addAttribute("registered_success", "new user registered successfully");
         System.out.println("user registered successfully");
         return "redirect:/index";
     }
 
     @GetMapping("/user/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+    public String logoutPage(final HttpServletRequest request, final HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "/user/login-form";
     }
-//  todo deprecated
-
-//    @GetMapping("/user/loggedIn")
-//    public String loggedIn (){
-//        return "user/loggedIn";
-//    }
 
     @GetMapping("/user/login-form")
-    public String userLogin () {
+    public String userLogin() {
         return "user/login-form";
     }
+
     @GetMapping("user/loginError")
-    public String userLoginError () {
+    public String userLoginError() {
         return "user/loginError";
     }
 }
+
