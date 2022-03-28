@@ -1,8 +1,10 @@
 package pl.arturzaczek.demoSchool.model.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserRegisterForm {
     private String formName;
     private String formLastName;
