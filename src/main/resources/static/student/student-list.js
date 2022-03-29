@@ -70,7 +70,7 @@ function populateStudentsList() {
 
 function parseGradeListIntoString(gradeList) {
     let resultString = 'grade list: ';
-    gradeList.forEach(grade => resultString += ("\t \n [" + grade.gradeValue + "], "))
+    gradeList.forEach(grade => resultString += `${grade.subject}-${grade.gradeValueEnum} ,`)
     return resultString;
 }
 
@@ -96,14 +96,18 @@ function detailFormatter(index, row) {
         '<div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="deleteModal">Are you sure want to delete user?</h5>' +
         '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
         '</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> ' +
-        '<button type="button" class="btn btn-primary" onClick="deleteStudentById(' + row.student_id + ')" data-dismiss="modal">Delete user</button></div></div></div></div>';
+        '<button type="button" class="btn btn-primary" onClick="deleteStudentById(' + row.student_id + ')" data-dismiss="modal">Delete user</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
 
     return "<div class='student-table-details'><h5>Details:</h5></br><div class='student-table-details-row'>" + html.join('') + deleteButton + " " +
         goToProfileButton + modal + "</div>";
 }
 
 function deleteStudentById(student_id) {
-    let url = "/rest/student/" + student_id;
+    const url = "/rest/student/" + student_id;
     setTimeout(function () {
         getStudentsList();
     }, 200);

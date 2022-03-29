@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.arturzaczek</groupId>
     <artifactId>demoSchool</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.35-SNAPSHOT</version>
     <name>demoSchool</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -24,6 +24,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

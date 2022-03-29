@@ -23,7 +23,7 @@
                 <li class="nav-item ml-3">
                     <a class="nav-link ml-3 " th:href="@{/doc}">Doc</a>
                 </li>
-                <li class="nav-item ml-3" th:if="${@userContextService.logged}">
+                <li class="nav-item ml-3" th:if="${@userContextServiceImpl.logged}">
                     <a class="nav-link ml-3" th:href="@{/addStudent}">Add student</a>
                 </li>
                 <li class="nav-item ml-3" id="students-list-icon">
@@ -32,20 +32,20 @@
                 </li>
             </ul>
             <ul class="navbar-nav user-field">
-                <li class="nav-item ml-3 user-logged-icon" th:unless="${@userContextService.logged}">
+                <li class="nav-item ml-3 user-logged-icon" th:unless="${@userContextServiceImpl.logged}">
                     <a class="nav-link" th:href="@{/user/login}">
                         <img th:src="@{~/images/icon/user-solid.svg}" alt="user icon">Log in</a>
                 </li>
-                <li class="nav-item ml-3" th:unless="${@userContextService.logged}">
+                <li class="nav-item ml-3" th:unless="${@userContextServiceImpl.logged}">
                     <a class="nav-link" th:href="@{/user/register}">Register</a>
                 </li>
-                <li class="nav-item ml-3" th:if="${@userContextService.logged}">
+                <li class="nav-item ml-3" th:if="${@userContextServiceImpl.logged}">
                     <a class="nav-link" th:href="@{/user/logout}">Log out</a>
                 </li>
                 <div id="user-logged-icon" class="nav-item ml-3 mt-2">
                     <a th:href="@{/studentProfile/}"
-                       th:if="${@userContextService.isLogged}"
-                       th:text="${@userContextService.loggedAs}">
+                       th:if="${@userContextServiceImpl.isLogged}"
+                       th:text="${@userContextServiceImpl.loggedAs}">
                     </a>
                 </div>
             </ul>

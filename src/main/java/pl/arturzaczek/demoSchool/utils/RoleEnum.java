@@ -1,4 +1,4 @@
-package pl.arturzaczek.demoSchool.service;
+package pl.arturzaczek.demoSchool.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

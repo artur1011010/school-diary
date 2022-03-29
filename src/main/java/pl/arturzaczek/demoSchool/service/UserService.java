@@ -1,105 +1,19 @@
 package pl.arturzaczek.demoSchool.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import pl.arturzaczek.demoSchool.model.dto.StudentResponse;
 import pl.arturzaczek.demoSchool.model.dto.UserRegisterForm;
-import pl.arturzaczek.demoSchool.model.entities.Role;
 import pl.arturzaczek.demoSchool.model.entities.User;
-import pl.arturzaczek.demoSchool.model.repositories.RoleRepository;
-import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
-import pl.arturzaczek.demoSchool.utils.RandomUserHelper;
-import pl.arturzaczek.demoSchool.utils.StudentMapper;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-@Service
-@Slf4j
-@RequiredArgsConstructor
-public class UserService {
+public interface UserService {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final RandomUserHelper randomUserHelper;
-    private final StudentMapper studentMapper;
-
-    public void registerUser(final UserRegisterForm userRegisterForm) {
-        final User user = new User();
-        user.setAddedDate(LocalDateTime.now());
-        user.setFirstName(userRegisterForm.getFormName());
-        user.setLastName(userRegisterForm.getFormLastName());
-        user.setEmail(userRegisterForm.getEmail());
-        user.setPasswordHash(passwordEncoder.encode(userRegisterForm.getPassword()));
-        getORCreateDefaultRole(user);
-        userRepository.save(user);
-    }
-
-    public List<StudentResponse> getUsersList() {
-        return userRepository
-                .findAll()
-                .stream()
-                .map(studentMapper::mapUserToStudentResponse)
-                .collect(Collectors.toList());
-    }
-
-    public void saveUser(final User user) {
-        userRepository.save(user);
-    }
-
-    public void save20users() {
-        final List<User> randomUserM = randomUserHelper.createRandomUserM();
-        final List<User> randomUserF = randomUserHelper.createRandomUserF();
-        randomUserM.addAll(randomUserF);
-        userRepository.saveAll(randomUserM);
-    }
-
-    public ResponseEntity<StudentResponse> getStudentById(final Long student_id) {
-        final Optional<User> byId = userRepository.findById(student_id);
-        if (byId.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(studentMapper.mapUserToStudentResponse(byId.get()));
-    }
-
-    public ResponseEntity deleteById(final Long long_id) {
-        final Optional<User> byId = userRepository.findById(long_id);
-        if (byId.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        userRepository.deleteById(long_id);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    public boolean checkIfUserExist(final String email) {
-        final Optional<User> userOptional = userRepository.findFirstByEmail(email);
-        if (userOptional.isPresent()) {
-            return true;
-        }
-        return false;
-    }
-
-    protected void getORCreateDefaultRole(final User user) {
-        Role role = roleRepository.findByRoleName(RoleEnum.ROLE_USER.toString())
-                .orElseGet(() -> roleRepository.save(new Role(RoleEnum.ROLE_USER.toString())));
-        user.addRole(role);
-    }
-
-    protected void getORCreateDefaultRole(final User user, final RoleEnum roleEnum) {
-        final Role role = roleRepository.findByRoleName(roleEnum.toString())
-                .orElseGet(() -> roleRepository.save(new Role(roleEnum.toString())));
-        user.addRole(role);
-    }
-
-    public List<User> getUserList() {
-        final List<User> users = userRepository.findAll();
-        return users;
-    }
+    void registerUser(UserRegisterForm userRegisterForm);
+    List<StudentResponse> getUsersList();
+    void saveUser(User user);
+    void save20users();
+    ResponseEntity<StudentResponse> getStudentById(Long student_id);
+    ResponseEntity deleteById(Long long_id);
+    boolean checkIfUserExist(String email);
+    List<User> getUserList();
 }

@@ -33,7 +33,7 @@ public class StudentController {
     }
 
     @GetMapping("/studentProfile/{id}")
-    public String getStudentProfile2(@PathVariable String id, Model model) {
+    public String getStudentProfile2(@PathVariable final String id, final Model model) {
         model.addAttribute("student_id", id);
         model.addAttribute("grades", studentService.getGrades());
         return "studentProfile";

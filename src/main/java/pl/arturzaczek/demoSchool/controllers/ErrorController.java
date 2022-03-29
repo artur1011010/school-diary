@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController  {
 
     @RequestMapping("/error")
-    public String handleError(HttpServletRequest request) {
+    public String handleError(final HttpServletRequest request) {
         log.error("url= /error, method=handleError() REQUEST: " + RequestDispatcher.ERROR_STATUS_CODE);
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        final Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
@@ -30,7 +30,7 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
 
     @Override
     public String getErrorPath() {
-        return null;
+        return "error/error";
     }
 
 }

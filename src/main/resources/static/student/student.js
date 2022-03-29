@@ -45,7 +45,8 @@ function parseGradeToTable(grades) {
     let result = '';
     const tableHeader = '<table class="table"><thead><tr><th scope="col" class="col-3">Subject:</th><th scope="col" class="col-9">Grades:</th></tr></thead><tbody>';
     const tableEnding = ' </tbody></table>';
-    let rows = [], subjects = [];
+    let rows = [];
+    let subjects = [];
 
     for (let i = 0; i < grades.length; i++) {
         const tempSubject = grades[i].subject;
@@ -60,6 +61,7 @@ function parseGradeToTable(grades) {
     result += tableHeader;
     rows.forEach(row => result += (row + '</td></tr>'));
     result += tableEnding;
+    console.log("wynik tworzenia tabeli:\n" + result)
     return result;
 }
 

@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.arturzaczek.demoSchool.model.entities.User;
-import pl.arturzaczek.demoSchool.service.RoleEnum;
 import pl.arturzaczek.demoSchool.service.RoleService;
 
 import java.time.LocalDate;
@@ -37,10 +36,10 @@ public class RandomUserHelper {
         Collections.shuffle(studentNamesM);
         Collections.shuffle(studentLastNamesM);
         Collections.shuffle(emails);
-        List<User> users = new ArrayList<>();
-        Random random = new Random();
+        final List<User> users = new ArrayList<>();
+        final Random random = new Random();
         for (int i = 0; i < 10; i++) {
-            User user = new User();
+            final User user = new User();
             user.setFirstName(studentNamesM.get(i));
             user.setLastName(studentLastNamesM.get(i));
             String simplifiedEmail = simplifyLatinChars(studentNamesM.get(i) + "." + studentLastNamesM.get(i)) + random.nextInt(1000) + emails.get(i / 2);
@@ -58,10 +57,10 @@ public class RandomUserHelper {
         Collections.shuffle(studentNamesF);
         Collections.shuffle(studentLastNamesF);
         Collections.shuffle(emails);
-        List<User> users = new ArrayList<>();
-        Random random = new Random();
+        final List<User> users = new ArrayList<>();
+        final Random random = new Random();
         for (int i = 0; i < 10; i++) {
-            User user = new User();
+            final User user = new User();
             user.setFirstName(studentNamesF.get(i));
             user.setLastName(studentLastNamesF.get(i));
             String simplifiedEmail = simplifyLatinChars(studentNamesF.get(i) + "." + studentLastNamesF.get(i)) + random.nextInt(1000) + emails.get(i / 2);
@@ -75,8 +74,8 @@ public class RandomUserHelper {
     }
 
     private LocalDate between() {
-        LocalDate startInclusive = LocalDate.of(1970, 1, 1);
-        LocalDate endExclusive = LocalDate.of(2005, 12, 30);
+        final LocalDate startInclusive = LocalDate.of(1970, 1, 1);
+        final LocalDate endExclusive = LocalDate.of(2005, 12, 30);
         long startEpochDay = startInclusive.toEpochDay();
         long endEpochDay = endExclusive.toEpochDay();
         long randomDay = ThreadLocalRandom
@@ -86,8 +85,8 @@ public class RandomUserHelper {
     }
 
     private String simplifyLatinChars(final String inputString) {
-        char[] input = inputString.toCharArray();
-        StringBuilder output = new StringBuilder();
+        final char[] input = inputString.toCharArray();
+        final StringBuilder output = new StringBuilder();
         int inputLength = input.length;
         for (int i = 0; i < inputLength; i++) {
             switch (input[i]) {
