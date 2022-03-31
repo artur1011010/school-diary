@@ -10,18 +10,20 @@ function getStudentDetails() {
         dataType: "json",
         method: "GET",
         success: function (result) {
+            console.log(result)
             populateProfile(result);
         }
     })
 }
 
 function populateProfile(data) {
-    let $studentId = $('#id-details');
-    let $firstName = $('#first-name-details');
-    let $lastName = $('#last-name-details');
-    let $email = $('#email-details');
-    let $birthDate = $('#birth-date-details');
+    const $studentId = $('#id-details');
+    const $firstName = $('#first-name-details');
+    const $lastName = $('#last-name-details');
+    const $email = $('#email-details');
+    const $birthDate = $('#birth-date-details');
     // todo - prevent undefined error
+    // console.log(data.gradeList)
     populateGrades(data.gradeList);
     $studentId.val(data.id);
     $firstName.val(data.firstName);
@@ -61,12 +63,12 @@ function parseGradeToTable(grades) {
     result += tableHeader;
     rows.forEach(row => result += (row + '</td></tr>'));
     result += tableEnding;
-    console.log("wynik tworzenia tabeli:\n" + result)
+    // console.log("wynik tworzenia tabeli:\n" + result)
     return result;
 }
 
 function parseGrade(grade) {
-    console.log(grade)
+    // console.log(grade)
     let result = ''
     switch (grade.gradeValueEnum) {
         case 'EXCELLENT':
@@ -98,7 +100,7 @@ function addGradeProfile() {
     }
     const subjectName = $("#add-grade-subject1").val();
     const gradeValue = $("#add-grade-value").val();
-    console.log('grade value:\n' + gradeValue)
+    // console.log('grade value:\n' + gradeValue)
     const gradeDTO = {
         gradeValueEnum: gradeValue,
         subjectName: subjectName
@@ -112,7 +114,7 @@ function addGradeProfile() {
         data: stringGrade,
         method: "POST",
         success: function (result) {
-            console.log(result.status);
+            // console.log(result.status);
         },
         complete: function (xhr, textStatus) {
             if (xhr.status === 200) {

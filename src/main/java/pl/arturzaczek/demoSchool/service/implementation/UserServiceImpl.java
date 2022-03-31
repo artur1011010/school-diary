@@ -44,12 +44,13 @@ public class UserServiceImpl implements UserService {
     private final StudentMapper studentMapper;
 
     public void registerUser(final UserRegisterForm userRegisterForm) {
-        final User user = new User();
+        final User user = User.builder()
+                .firstName(userRegisterForm.getFormName())
+                .lastName(userRegisterForm.getFormLastName())
+                .email(userRegisterForm.getEmail())
+                .passwordHash(passwordEncoder.encode(userRegisterForm.getPassword()))
+                .build();
         user.setAddedDate(LocalDateTime.now());
-        user.setFirstName(userRegisterForm.getFormName());
-        user.setLastName(userRegisterForm.getFormLastName());
-        user.setEmail(userRegisterForm.getEmail());
-        user.setPasswordHash(passwordEncoder.encode(userRegisterForm.getPassword()));
         getORCreateDefaultRole(user);
         userRepository.save(user);
         createRegistrationMail(userRegisterForm);
@@ -58,8 +59,8 @@ public class UserServiceImpl implements UserService {
     private void createRegistrationMail(final UserRegisterForm userRegisterForm) {
         final String contentToSend = content.replace("?", userRegisterForm.getEmail());
         try {
-            mailService.sendMail(userRegisterForm.getEmail(),title, contentToSend, true);
-        }catch (MessagingException ex){
+            mailService.sendMail(userRegisterForm.getEmail(), title, contentToSend, true);
+        } catch (MessagingException ex) {
             log.error("Error during sending email\n{}", ex.getMessage());
         }
     }
@@ -94,34 +95,33 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity deleteById(final Long long_id) {
         final Optional<User> byId = userRepository.findById(long_id);
         if (byId.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
         userRepository.deleteById(long_id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     public boolean checkIfUserExist(final String email) {
-        final Optional<User> userOptional = userRepository.findFirstByEmail(email);
-        if (userOptional.isPresent()) {
-            return true;
-        }
-        return false;
+        return userRepository
+                .findFirstByEmail(email)
+                .isPresent();
     }
 
     protected void getORCreateDefaultRole(final User user) {
-        final Role role = roleRepository.findByRoleName(RoleEnum.ROLE_USER.toString())
+        final Role role = roleRepository
+                .findByRoleName(RoleEnum.ROLE_USER.toString())
                 .orElseGet(() -> roleRepository.save(new Role(RoleEnum.ROLE_USER.toString())));
         user.addRole(role);
     }
 
     protected void getORCreateDefaultRole(final User user, final RoleEnum roleEnum) {
-        final Role role = roleRepository.findByRoleName(roleEnum.toString())
+        final Role role = roleRepository
+                .findByRoleName(roleEnum.toString())
                 .orElseGet(() -> roleRepository.save(new Role(roleEnum.toString())));
         user.addRole(role);
     }
 
     public List<User> getUserList() {
-        final List<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 }

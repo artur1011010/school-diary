@@ -17,13 +17,15 @@ public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
     public void getORCreateDefaultRole(final User user) {
-        final Role role = roleRepository.findByRoleName(RoleEnum.ROLE_USER.toString())
+        final Role role = roleRepository
+                .findByRoleName(RoleEnum.ROLE_USER.toString())
                 .orElseGet(() -> roleRepository.save(new Role(RoleEnum.ROLE_USER.toString())));
         user.addRole(role);
     }
 
     public void getORCreateDefaultRole(final User user,final RoleEnum roleEnum) {
-        final Role role = roleRepository.findByRoleName(roleEnum.toString())
+        final Role role = roleRepository
+                .findByRoleName(roleEnum.toString())
                 .orElseGet(() -> roleRepository.save(new Role(roleEnum.toString())));
         user.addRole(role);
     }

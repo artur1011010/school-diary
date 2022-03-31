@@ -17,7 +17,10 @@ public class MailServiceImpl implements MailService {
 
     private final JavaMailSender javaMailSender;
 
-    public void sendMail(final String to, final String subject, final String text, final boolean isHtmlContent) throws MessagingException {
+    public void sendMail(final String to,
+                         final String subject,
+                         final String text,
+                         final boolean isHtmlContent) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
         mimeMessageHelper.setTo(to);

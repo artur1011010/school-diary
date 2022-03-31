@@ -1,10 +1,10 @@
 package pl.arturzaczek.demoSchool.model.entities;
 
 import lombok.*;
+import org.apache.commons.collections.CollectionUtils;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -25,9 +25,8 @@ public class User extends BaseEntity {
     private String lastName;
     @Column(unique = true)
     private String email;
-    @Basic
     private LocalDate birthDate;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Grade> gradeList;
     @Column(name = "password_hash", length = 100)
     private String passwordHash;
@@ -42,16 +41,16 @@ public class User extends BaseEntity {
         this.roleSet = roleSet;
     }
 
-    public void addRole(Role role) {
-        if (roleSet == null) {
+    public void addRole(final Role role) {
+        if (CollectionUtils.isEmpty(roleSet)) {
             roleSet = new HashSet<>();
         }
         roleSet.add(role);
     }
 
-    public void addToGradeList(Grade grade) {
-        if (gradeList == null) {
-            gradeList = new ArrayList<Grade>();
+    public void addToGradeList(final Grade grade) {
+        if (CollectionUtils.isEmpty(gradeList)) {
+            gradeList = new ArrayList<>();
         }
         gradeList.add(grade);
     }

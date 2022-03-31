@@ -32,7 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  *       -STUDENT,
  *       -PARENT,
  */
-                .antMatchers("/studentProfile/*").hasAnyRole("USER", "ADMIN", "TEACHER")
+                .antMatchers("/studentProfile/*").hasAnyRole("PRINCIPAL", "ADMIN", "TEACHER")
+                .antMatchers("/rest/student/*").hasAnyRole("PRINCIPAL", "ADMIN", "TEACHER")
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable().headers().frameOptions().disable()

@@ -10,8 +10,6 @@ import pl.arturzaczek.demoSchool.model.repositories.UserRepository;
 import pl.arturzaczek.demoSchool.service.GradeService;
 import pl.arturzaczek.demoSchool.utils.GradeMapper;
 
-import java.util.Optional;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -22,12 +20,14 @@ public class GradeServiceImpl implements GradeService {
 
     public void addGradeToStudentById(final Long studentId, final GradeDTO gradeDTO) {
         log.info("addGradeToStudentById: \n{}", gradeDTO);
-        final Optional<User> byId = userRepository.findById(studentId);
-        final User user = byId.orElseGet(() -> User.builder().firstName("Error").build());
+        final User user = userRepository
+                .findById(studentId)
+                .orElseGet(() -> User.builder()
+                        .firstName("Error")
+                        .build());
         final Grade grade = gradeMapper.mapDTOtoGradeEntity(gradeDTO);
         grade.setStudent(user.getId());
         user.addToGradeList(grade);
         userRepository.save(user);
     }
-
 }
